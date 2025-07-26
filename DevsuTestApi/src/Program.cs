@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,18 +17,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-// Define a minimal API endpoint
-app.MapGet("/example", () =>
-{
-    return new ExampleModel { Id = 1, Name = "Sample" };
-});
+app.MapGet("/", () => "Hello from DevsuTestApi!");
 
 app.Run();
-
-public class ExampleModel
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-}

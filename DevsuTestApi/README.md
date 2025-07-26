@@ -1,52 +1,65 @@
-# Minimal API Project
+# DevsuTestApi
 
-This project is a simple implementation of a Minimal API using .NET. It demonstrates how to set up a web application with minimal overhead and define API endpoints.
+A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
 
-## Project Structure
+## Prerequisites
 
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (Preview/RC)
+- [Docker](https://www.docker.com/get-started)
+
+## Build & Run Locally
+
+```sh
+dotnet build src/DevsuTestApi.csproj
+dotnet run --project src/DevsuTestApi.csproj
 ```
-DevsuTestApi
-├── src
-│   ├── Program.cs
-│   └── Models
-│       └── ExampleModel.cs
-├── DevsuTestApi.sln
-└── README.md
+
+Visit [http://localhost:5000](http://localhost:5000) or [http://localhost:8080](http://localhost:8080) (Docker).
+
+## Run Tests
+
+```sh
+dotnet test ../DevsuTestApi.Tests/DevsuTestApi.Tests.csproj
 ```
 
-## Getting Started
+## Build & Run with Docker
 
-### Prerequisites
+```sh
+docker build -t devsu-test-api .
+docker run -p 8080:80 devsu-test-api
+```
 
-- .NET SDK (latest version)
+## API Endpoints
 
-### Running the Project
+- `GET /`  
+  Returns: `Hello from DevsuTestApi!`
 
-1. Clone the repository or download the project files.
-2. Navigate to the project directory in your terminal.
-3. Run the following command to restore dependencies:
+## Swagger
 
-   ```
-   dotnet restore
-   ```
+Swagger UI is available at `/swagger` in development mode.
 
-4. Start the application using:
+---
 
-   ```
-   dotnet run --project src/DevsuTestApi.csproj
-   ```
+**Project Structure**
 
-5. The API will be available at `http://localhost:5000` (or the port specified in your configuration).
+- `src/` - API source code
+- `Dockerfile` - Docker build instructions
+- `.dockerignore` - Docker ignore file
+- `../DevsuTestApi.Tests/` - Test project
 
-### API Endpoints
+---
 
-- **GET /example**: Retrieves a list of ExampleModel items.
-- **POST /example**: Creates a new ExampleModel item.
+**Local Setup**
 
-### Contributing
+1. Clone the repository:  
+   `git clone https://github.com/yourusername/devsu_test_full_stack_BP.git`
+2. Navigate to the project directory:  
+   `cd devsu_test_full_stack_BP/DevsuTestApi`
+3. Restore dependencies:  
+   `dotnet restore`
+4. Build the project:  
+   `dotnet build`
+5. Run the project:  
+   `dotnet run`
 
-Feel free to submit issues or pull requests for improvements or bug fixes.
-
-### License
-
-This project is licensed under the MIT License.
+The API should now be running on [http://localhost:5000](http://localhost:5000).
