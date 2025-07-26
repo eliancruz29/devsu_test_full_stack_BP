@@ -60,6 +60,6 @@ Swagger UI is available at `/swagger` in development mode.
 4. Build the project:  
    `dotnet build`
 5. Run the project:  
-   `dotnet run`
+   `dotnet run --project src/DevsuTestApi.csproj`
 
 The API should now be running on [http://localhost:5000](http://localhost:5000).
