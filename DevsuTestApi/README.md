@@ -45,16 +45,24 @@ dotnet test ../DevsuTestApi.Tests/DevsuTestApi.Tests.csproj
 **Build the Docker image:**
 
 ```sh
-docker build -t devsu-test-api .
+docker-compose up --build
 ```
 
 **Run the Docker container:**
 
-```sh
-docker run -p 8080:80 devsu-test-api
-```
+Visit [http://localhost:5000](http://localhost:5000) to access the API.
 
-Visit [http://localhost:8080](http://localhost:8080) to access the API.
+**Create and apply migrations:**
+
+   ```sh
+   docker-compose exec api dotnet ef migrations add InitialCreate --project src/DevsuTestApi.csproj
+   docker-compose exec api dotnet ef database update --project src/DevsuTestApi.csproj
+   ```
+**If EF tools are missing:**
+
+   ```sh
+   dotnet tool install --global dotnet-ef
+   ```
 
 ## API Endpoints
 

@@ -1,13 +1,14 @@
-version: '3.9'
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: DevsuTestApi/Dockerfile
     ports:
-      - "5000:8080"
+      - "5001"
     depends_on:
       - sqlserver
     environment:
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:5001
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=DevsuAppDb;User=sa;Password=Your_password123;TrustServerCertificate=True;
 
   sqlserver:
