@@ -7,14 +7,32 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
 - [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (Preview/RC)
 - [Docker](https://www.docker.com/get-started)
 
+## Entity Framework Core Setup
+
+1. **Install EF Core CLI tools (global):**
+
+   ```sh
+   dotnet tool install --global dotnet-ef --version 9.0.7
+   ```
+
+2. **Add EF Core packages (already included in `.csproj`):**
+   - `Microsoft.EntityFrameworkCore`
+   - `Microsoft.EntityFrameworkCore.SqlServer`
+   - `Microsoft.EntityFrameworkCore.Tools`
+
+3. **Create and apply migrations:**
+
+   ```sh
+   dotnet ef migrations add InitialCreate --project src/DevsuTestApi.csproj
+   dotnet ef database update --project src/DevsuTestApi.csproj
+   ```
+
 ## Build & Run Locally
 
 ```sh
 dotnet build src/DevsuTestApi.csproj
 dotnet run --project src/DevsuTestApi.csproj
 ```
-
-Visit [http://localhost:5000](http://localhost:5000) or [http://localhost:8080](http://localhost:8080) (Docker).
 
 ## Run Tests
 
@@ -24,10 +42,19 @@ dotnet test ../DevsuTestApi.Tests/DevsuTestApi.Tests.csproj
 
 ## Build & Run with Docker
 
+**Build the Docker image:**
+
 ```sh
 docker build -t devsu-test-api .
+```
+
+**Run the Docker container:**
+
+```sh
 docker run -p 8080:80 devsu-test-api
 ```
+
+Visit [http://localhost:8080](http://localhost:8080) to access the API.
 
 ## API Endpoints
 

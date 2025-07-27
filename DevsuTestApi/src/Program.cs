@@ -1,8 +1,6 @@
 using DevsuTestApi.Database;
-using Microsoft.AspNetCore.Builder;
+using DevsuTestApi.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +18,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("/", () => "Minimal API with SQL Server running in Docker!");
 
 app.Run();
