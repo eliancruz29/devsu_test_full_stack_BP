@@ -1,6 +1,8 @@
 using DevsuTestApi.Database;
 using DevsuTestApi.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Carter;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
     o.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+
+var assembly = typeof(Program).Assembly;
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+
+builder.Services.AddCarter();
+
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 var app = builder.Build();
 
@@ -21,6 +31,8 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
+
+app.MapCarter();
 
 app.UseHttpsRedirection();
 

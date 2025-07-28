@@ -17,6 +17,11 @@ public class ApplicationDbContext : DbContext
         #region Client
         modelBuilder
             .Entity<Client>()
+            .Property(p => p.Gender)
+            .HasConversion(new EnumMemberConverter<Gender>());
+            
+        modelBuilder
+            .Entity<Client>()
             .Property(p => p.Status)
             .HasConversion(new EnumMemberConverter<Status>());
         #endregion

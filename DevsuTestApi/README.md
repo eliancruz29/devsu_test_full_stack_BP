@@ -30,8 +30,8 @@ Visit [http://localhost:5000](http://localhost:5000) to access the API.
 **Create and apply migrations:**
 
    ```sh
-   docker-compose exec api dotnet ef migrations add InitialCreate --project DevsuTestApi/src/DevsuTestApi.csproj
-   docker-compose exec api dotnet ef database update --project DevsuTestApi/src/DevsuTestApi.csproj -v
+   dotnet ef migrations add InitialCreate --project DevsuTestApi/src/DevsuTestApi.csproj
+   dotnet ef database update --project DevsuTestApi/src/DevsuTestApi.csproj -v
    ```
 
 ## API Endpoints
@@ -62,6 +62,8 @@ Swagger UI is available at `/swagger` in development mode.
    `cd devsu_test_full_stack_BP/DevsuTestApi`
 3. Restore dependencies:  
    `dotnet restore`
-4. Build & Run with Docker
+4. Navigate to the ROOT directory:  
+   `cd devsu_test_full_stack_BP`
+5. Build & Run with Docker
 
 The API should now be running on [http://localhost:5000](http://localhost:5000).

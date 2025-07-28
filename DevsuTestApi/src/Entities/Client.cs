@@ -40,27 +40,24 @@ public sealed class Client : Person
     public IReadOnlyCollection<Account> Accounts => _accounts;
 
     public static Client Create(
-        Guid id,
         string name,
         Gender gender,
         DateTime dateOfBirth,
         string identification,
         string address,
         string phoneNumber,
-        Guid clientId,
-        string password,
-        Status status)
+        string password)
     {
         return new (
-            id,
+            new Guid(),
             name,
             gender,
             dateOfBirth,
             identification,
             address,
             phoneNumber,
-            clientId,
+            new Guid(),
             password,
-            status);
+            Status.Active);
     }
 }

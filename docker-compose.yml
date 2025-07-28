@@ -4,12 +4,13 @@ services:
       context: .
       dockerfile: DevsuTestApi/Dockerfile
     ports:
-      - "5001:443"
+      - "5002:5002"
     depends_on:
       - sqlserver
     environment:
-      - ASPNETCORE_URLS=http://+:5001
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=DevsuAppDb;User=sa;Password=Your_password123;TrustServerCertificate=True;
+      - ASPNETCORE_URLS=http://+:5002
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Database=Server=sqlserver;Database=DevsuAppDb;User=sa;Password=Your_password123;TrustServerCertificate=True;
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
