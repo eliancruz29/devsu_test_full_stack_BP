@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevsuTestApi.Features.Clients;
 
-public static class GetClients
+public static class GetListOfClients
 {
     public class Query : IRequest<Result<List<ClientResponse>>>
     {
@@ -28,7 +28,7 @@ public static class GetClients
             if (clients is null)
             {
                 return Result.Failure<List<ClientResponse>>(new Error(
-                    "GetClients.Null",
+                    "GetListOfClients.Null",
                     "The list clients was not found"));
             }
 
@@ -37,13 +37,13 @@ public static class GetClients
     }
 }
 
-public class GetClientsEndpoint : ICarterModule
+public class GetListOfClientsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {        
         app.MapGet("api/clientes", async (ISender sender) =>
         {
-            var query = new GetClients.Query();
+            var query = new GetListOfClients.Query();
 
             var result = await sender.Send(query);
 
