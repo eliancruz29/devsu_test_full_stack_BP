@@ -1,12 +1,12 @@
 using Carter;
-using DevsuTestApi.Contracts;
+using DevsuTestApi.Contracts.Clients;
 using DevsuTestApi.Database;
+using DevsuTestApi.Entities;
+using DevsuTestApi.Enums;
 using DevsuTestApi.Shared;
 using FluentValidation;
-using MediatR;
 using Mapster;
-using DevsuTestApi.Enums;
-using DevsuTestApi.Entities;
+using MediatR;
 
 namespace DevsuTestApi.Features.Clients;
 
@@ -40,20 +40,11 @@ public static class CreateClient
         }
     }
 
-    internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
+    internal sealed class Handler(ApplicationDbContext dbContext, IValidator<Command> validator) : IRequestHandler<Command, Result<Guid>>
     {
-        private readonly ApplicationDbContext _dbContext;
-        private readonly IValidator<Command> _validator;
-
-        public Handler(ApplicationDbContext dbContext, IValidator<Command> validator)
-        {
-            _dbContext = dbContext;
-            _validator = validator;
-        }
-
         public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
+            var validationResult = validator.Validate(request);
             if (!validationResult.IsValid)
             {
                 return Result.Failure<Guid>(new Error(
@@ -70,9 +61,9 @@ public static class CreateClient
                 request.PhoneNumber,
                 request.Password);
 
-            _dbContext.Add(client);
+            dbContext.Add(client);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
             return client.Id;
         }
