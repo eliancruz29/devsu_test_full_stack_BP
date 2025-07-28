@@ -1,4 +1,4 @@
-namespace DevsuTestApi.Entities;
+namespace DevsuTestApi.Primitives;
 
 public interface BaseEntity
 {

@@ -1,4 +1,5 @@
 using DevsuTestApi.Enums;
+using DevsuTestApi.Primitives;
 
 namespace DevsuTestApi.Entities;
 
