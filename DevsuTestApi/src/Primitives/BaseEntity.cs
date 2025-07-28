@@ -1,6 +1,11 @@
 namespace DevsuTestApi.Primitives;
 
-public interface BaseEntity
+public abstract class BaseEntity
 {
-    Guid Id { get; set; }
+    protected BaseEntity(Guid id)
+    {
+        Id = id;
+    }
+    
+    public Guid Id { get; private init; }
 }

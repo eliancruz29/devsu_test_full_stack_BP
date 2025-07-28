@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: DevsuTestApi/Dockerfile
     ports:
-      - "5001"
+      - "5001:443"
     depends_on:
       - sqlserver
     environment:
@@ -18,7 +18,7 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Your_password123
     ports:
-      - "1433:1433"
+      - "11433:1433"
     volumes:
       - sql_data:/var/opt/mssql
 

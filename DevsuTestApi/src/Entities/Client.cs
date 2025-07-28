@@ -2,13 +2,65 @@ using DevsuTestApi.Enums;
 
 namespace DevsuTestApi.Entities;
 
-public class Client : Person
+public sealed class Client : Person
 {
-    public Guid ClientId { get; set; }
+    private readonly List<Account> _accounts = [];
 
-    public string Password { get; set; } = string.Empty;
+    private Client(
+        Guid id,
+        string name,
+        Gender gender,
+        DateTime dateOfBirth,
+        string identification,
+        string address,
+        string phoneNumber,
+        Guid clientId,
+        string password,
+        Status status
+    ) : base(
+        id,
+        name,
+        gender,
+        dateOfBirth,
+        identification,
+        address,
+        phoneNumber)
+    {
+        ClientId = clientId;
+        Password = password;
+        Status = status;
+    }
 
-    public Status Status { get; set; }
+    public Guid ClientId { get; private set; }
 
-    
+    public string Password { get; private set; } = string.Empty;
+
+    public Status Status { get; private set; }
+
+    public IReadOnlyCollection<Account> Accounts => _accounts;
+
+    public static Client Create(
+        Guid id,
+        string name,
+        Gender gender,
+        DateTime dateOfBirth,
+        string identification,
+        string address,
+        string phoneNumber,
+        Guid clientId,
+        string password,
+        Status status)
+    {
+        return new (
+            id,
+            name,
+            gender,
+            dateOfBirth,
+            identification,
+            address,
+            phoneNumber,
+            clientId,
+            password,
+            status);
+    }
 }

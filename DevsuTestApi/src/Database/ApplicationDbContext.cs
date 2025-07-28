@@ -32,11 +32,11 @@ public class ApplicationDbContext : DbContext
             .HasConversion(new EnumMemberConverter<Status>());
         #endregion
 
-        #region Tranfers
+        #region Transfer
         modelBuilder
-            .Entity<Tranfers>()
+            .Entity<Transfer>()
             .Property(p => p.Type)
-            .HasConversion(new EnumMemberConverter<TranferTypes>());
+            .HasConversion(new EnumMemberConverter<TransferTypes>());
         #endregion
     }
 
@@ -44,5 +44,5 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Account> Accounts { get; set; }
 
-    public DbSet<Tranfers> Tranfers { get; set; }
+    public DbSet<Transfer> Transfers { get; set; }
 }

@@ -3,15 +3,52 @@ using DevsuTestApi.Primitives;
 
 namespace DevsuTestApi.Entities;
 
-public class Account : BaseEntity
+public sealed class Account : BaseEntity
 {
-    public Guid Id { get; set; }
+    private readonly List<Transfer> _transfers = [];
 
-    public string AccountNumber { get; set; } = string.Empty;
+    private Account(
+        Guid id,
+        Guid clientId,
+        string accountNumber,
+        AccountTypes type,
+        int openingBalance,
+        Status status
+    ) : base(id)
+    {
+        ClientId = clientId;
+        AccountNumber = accountNumber;
+        Type = type;
+        OpeningBalance = openingBalance;
+        Status = status;
+    }
 
-    public AccountTypes Type { get; set; }
+    public Guid ClientId { get; private set; }
 
-    public int OpeningBalance { get; set; }
+    public string AccountNumber { get; private set; } = string.Empty;
 
-    public Status Status { get; set; }
+    public AccountTypes Type { get; private set; }
+
+    public int OpeningBalance { get; private set; }
+
+    public Status Status { get; private set; }
+
+    public IReadOnlyCollection<Transfer> Transfers => _transfers;
+    
+    public static Account Create(
+        Guid id,
+        Guid clientId,
+        string accountNumber,
+        AccountTypes type,
+        int openingBalance,
+        Status status)
+    {
+        return new (
+            id,
+            clientId,
+            accountNumber,
+            type,
+            openingBalance,
+            status);
+    }
 }
