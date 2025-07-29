@@ -7,6 +7,5 @@ public record CreateAccountRequest
     Guid ClientId,
     string AccountNumber,
     AccountTypes Type,
-    int OpeningBalance,
-    Status Status
+    int OpeningBalance
 );

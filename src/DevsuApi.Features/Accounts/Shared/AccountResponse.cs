@@ -1,16 +1,13 @@
 using DevsuApi.Domain.Enums;
-using DevsuApi.Domain.Shared;
-using MediatR;
 
-namespace DevsuApi.Features.Accounts.CreateAccount;
+namespace DevsuApi.Features.Accounts.Shared;
 
-public sealed class CreateAccountCommand : IRequest<Result<Guid>>
+public class AccountResponse
 {
+    public Guid Id { get; set; }
     public Guid ClientId { get; set; }
-
     public string AccountNumber { get; set; } = string.Empty;
-
     public AccountTypes Type { get; set; }
-
     public int OpeningBalance { get; set; }
+    public Status Status { get; private set; }
 }
