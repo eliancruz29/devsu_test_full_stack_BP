@@ -1,5 +1,5 @@
 using DevsuApi.Domain.Entities;
-using DevsuApi.Domain.Exceptions;
+using DevsuApi.Domain.Exceptions.Clients;
 using DevsuApi.Domain.Interfaces;
 using DevsuApi.Domain.Repositories;
 using MediatR;

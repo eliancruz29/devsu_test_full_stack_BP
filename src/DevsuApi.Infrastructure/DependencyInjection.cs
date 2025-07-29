@@ -20,6 +20,7 @@ public static class DependencyInjection
 
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ITransferRepository, TransferRepository>();
 
         return services;
     }

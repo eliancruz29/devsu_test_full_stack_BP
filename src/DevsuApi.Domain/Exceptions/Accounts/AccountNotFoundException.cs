@@ -1,4 +1,4 @@
-namespace DevsuApi.Domain.Exceptions;
+namespace DevsuApi.Domain.Exceptions.Accounts;
 
 public sealed class AccountNotFoundException : Exception
 {

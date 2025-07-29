@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using DevsuApi.Domain.Exceptions;
+using DevsuApi.Domain.Exceptions.Accounts;
 
 namespace DevsuApi.Features.Accounts.DeleteAccount;
 

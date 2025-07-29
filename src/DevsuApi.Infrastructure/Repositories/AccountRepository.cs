@@ -29,6 +29,14 @@ internal class AccountRepository : IAccountRepository
         return _context.Accounts.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 
+    public async Task<Account?> GetByIdWithTransfersAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await _context.Accounts
+            .Include(o => o.Transfers)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(o => o.Id == id, cancellationToken);
+    }
+
     public IQueryable<Account> GetAll()
     {
         return _context.Accounts.AsNoTracking(); // Use AsNoTracking for read-only queries;
