@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using DevsuApi.Domain.Entities;
 using DevsuApi.Domain.Repositories;
 using DevsuApi.Infrastructure.Persistence;

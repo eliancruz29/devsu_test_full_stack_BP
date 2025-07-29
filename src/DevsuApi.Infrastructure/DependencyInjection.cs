@@ -19,6 +19,7 @@ public static class DependencyInjection
             sp.GetRequiredService<DevsuApiDbContext>());
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
 
         return services;
     }

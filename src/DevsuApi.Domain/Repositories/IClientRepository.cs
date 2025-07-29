@@ -9,5 +9,5 @@ public interface IClientRepository
     Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     IQueryable<Client> GetAll();
     void Update(Client client);
-    void Remove(Client product);
+    void Remove(Client client);
 }

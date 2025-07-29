@@ -36,19 +36,17 @@ public sealed class Account : BaseEntity
     public IReadOnlyCollection<Transfer> Transfers => _transfers;
     
     public static Account Create(
-        Guid id,
         Guid clientId,
         string accountNumber,
         AccountTypes type,
-        int openingBalance,
-        Status status)
+        int openingBalance)
     {
         return new (
-            id,
+            Guid.NewGuid(),
             clientId,
             accountNumber,
             type,
             openingBalance,
-            status);
+            Status.Active);
     }
 }

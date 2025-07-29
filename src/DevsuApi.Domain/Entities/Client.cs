@@ -48,15 +48,15 @@ public sealed class Client : Person
         string phoneNumber,
         string password)
     {
-        return new (
-            new Guid(),
+        return new(
+            Guid.NewGuid(),
             name,
             gender,
             dateOfBirth,
             identification,
             address,
             phoneNumber,
-            new Guid(),
+            Guid.NewGuid(),
             password,
             Status.Active);
     }
@@ -78,7 +78,7 @@ public sealed class Client : Person
             identification,
             address,
             phoneNumber);
-        
+
         Password = password;
         Status = status;
     }
