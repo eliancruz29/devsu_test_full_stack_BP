@@ -16,7 +16,7 @@ public sealed class UpdateClientHandler(
 {
     public async Task<Result<ClientResponse>> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
     {
-        Client? existantClient = await clientRepository.GetByIdAsync(request.Id);
+        Client? existantClient = await clientRepository.GetByIdAsync(request.Id, cancellationToken);
 
         if (existantClient is null)
         {

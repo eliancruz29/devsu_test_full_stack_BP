@@ -11,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddFeatures(typeof(Program).Assembly);
+builder.Services.AddFeatures();
+builder.Services.AddCarter();
 
 var app = builder.Build();
 

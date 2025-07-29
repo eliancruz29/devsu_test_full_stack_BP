@@ -1,5 +1,7 @@
 using DevsuApi.Domain.Interfaces;
+using DevsuApi.Domain.Repositories;
 using DevsuApi.Infrastructure.Persistence;
+using DevsuApi.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,9 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(sp =>
             sp.GetRequiredService<DevsuApiDbContext>());
+
+        services.AddScoped<IClientRepository, ClientRepository>();
+
         return services;
     }
 }

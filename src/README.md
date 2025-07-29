@@ -71,6 +71,7 @@ Swagger UI is available at `/swagger` in development mode.
             GetListOf/
             PatchUpdate/
             Update/
+            Delete/
       DevsuApi.Infrastructure/
          Extensions/
          Migrations/

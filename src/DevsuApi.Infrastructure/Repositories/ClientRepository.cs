@@ -25,9 +25,9 @@ internal class ClientRepository : IClientRepository
         return _context.Clients.AsNoTracking().Where(c => c.Id == id);
     }
 
-    public Task<Client?> GetByIdAsync(Guid id)
+    public Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return _context.Clients.SingleOrDefaultAsync(c => c.Id == id);
+        return _context.Clients.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 
     public IQueryable<Client> GetAll()
@@ -38,5 +38,10 @@ internal class ClientRepository : IClientRepository
     public void Update(Client client)
     {
         _context.Clients.Update(client);
+    }
+
+    public void Remove(Client client)
+    {
+        _context.Clients.Remove(client);
     }
 }
