@@ -49,4 +49,16 @@ public sealed class Account : BaseEntity
             openingBalance,
             Status.Active);
     }
+
+    public void Update(
+        string accountNumber,
+        AccountTypes type,
+        int openingBalance,
+        Status status)
+    {
+        AccountNumber = accountNumber;
+        Type = type;
+        OpeningBalance = openingBalance;
+        Status = status;
+    }
 }
