@@ -14,6 +14,11 @@ internal class TransferRepository : ITransferRepository
         _context = context;
     }
 
+    public void Add(Transfer transfer)
+    {
+        _context.Transfers.Add(transfer);
+    }
+
     public IQueryable<Transfer?> GetById(Guid id)
     {
         return _context.Transfers.AsNoTracking().Where(c => c.Id == id);

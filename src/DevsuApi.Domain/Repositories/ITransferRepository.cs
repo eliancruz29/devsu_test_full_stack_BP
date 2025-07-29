@@ -4,6 +4,7 @@ namespace DevsuApi.Domain.Repositories;
 
 public interface ITransferRepository
 {
+    void Add(Transfer transfer);
     IQueryable<Transfer?> GetById(Guid id);
     Task<Transfer?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     IQueryable<Transfer> GetAll();

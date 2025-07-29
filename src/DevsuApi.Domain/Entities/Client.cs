@@ -1,4 +1,5 @@
 using DevsuApi.Domain.Enums;
+using DevsuApi.Domain.Exceptions.Clients;
 
 namespace DevsuApi.Domain.Entities;
 
@@ -81,5 +82,27 @@ public sealed class Client : Person
 
         Password = password;
         Status = status;
+    }
+
+    public Account AddAccount(
+         string accountNumber,
+         AccountTypes type,
+         int openingBalance)
+    {
+        bool accountExist = _accounts.Any(a => a.AccountNumber == accountNumber);
+        if (accountExist)
+        {
+            throw new AccountAlreadyExistsException(Id, accountNumber);
+        }
+
+        Account newAccount = Account.Create(
+            Id,
+            accountNumber,
+            type,
+            openingBalance);
+
+        _accounts.Add(newAccount);
+
+        return newAccount;
     }
 }

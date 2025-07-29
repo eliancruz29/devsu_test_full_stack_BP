@@ -32,9 +32,9 @@ internal class AccountRepository : IAccountRepository
     public async Task<Account?> GetByIdWithTransfersAsync(Guid id, CancellationToken cancellationToken)
     {
         return await _context.Accounts
-            .Include(o => o.Transfers)
+            .Include(a => a.Transfers)
             .AsNoTracking()
-            .SingleOrDefaultAsync(o => o.Id == id, cancellationToken);
+            .SingleOrDefaultAsync(a => a.Id == id, cancellationToken);
     }
 
     public IQueryable<Account> GetAll()

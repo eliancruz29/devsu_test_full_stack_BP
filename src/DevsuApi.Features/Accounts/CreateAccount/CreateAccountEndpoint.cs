@@ -1,4 +1,5 @@
 using Carter;
+using DevsuApi.Domain.Exceptions.Clients;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -14,16 +15,23 @@ public class CreateAccountEndpoint : ICarterModule
     {
         app.MapPost("api/accounts", async (CreateAccountRequest request, ISender sender) =>
         {
-            var command = request.Adapt<CreateAccountCommand>();
-
-            var result = await sender.Send(command);
-
-            if (result.IsFailure)
+            try
             {
-                return Results.BadRequest(result.Error);
-            }
+                var command = request.Adapt<CreateAccountCommand>();
 
-            return Results.Ok(result.Value);
+                var result = await sender.Send(command);
+
+                if (result.IsFailure)
+                {
+                    return Results.BadRequest(result.Error);
+                }
+
+                return Results.Ok(result.Value);
+            }
+            catch (AccountAlreadyExistsException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
         })
         .WithName("CreateAccount")
         .WithTags("Accounts")

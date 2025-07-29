@@ -23,7 +23,7 @@ public sealed class CreateAccountHandler(
                 validationResult.ToString()));
         }
 
-        Client? client = await clientRepository.GetByIdAsync(request.ClientId, cancellationToken);
+        Client? client = await clientRepository.GetByIdWithAccountsAsync(request.ClientId, cancellationToken);
         if (client is null)
         {
             return Result.Failure<Guid>(new Error(
@@ -31,16 +31,15 @@ public sealed class CreateAccountHandler(
                 "The specified client does not exist."));
         }
 
-        var account = Account.Create(
-            client.Id,
+        Account newAccount = client.AddAccount(
             request.AccountNumber,
             request.Type,
             request.OpeningBalance);
 
-        accountRepository.Add(account);
+        accountRepository.Add(newAccount);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return account.Id;
+        return newAccount.Id;
     }
 }

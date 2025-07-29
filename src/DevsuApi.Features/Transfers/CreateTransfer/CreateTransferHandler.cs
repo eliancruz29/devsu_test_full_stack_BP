@@ -8,6 +8,7 @@ using MediatR;
 namespace DevsuApi.Features.Transfers.CreateTransfer;
 
 public sealed class CreateTransferHandler(
+    ITransferRepository transferRepository,
     IAccountRepository accountRepository,
     IUnitOfWork unitOfWork,
     IValidator<CreateTransferCommand> validator) : IRequestHandler<CreateTransferCommand, Result<Guid>>
@@ -31,6 +32,8 @@ public sealed class CreateTransferHandler(
         }
 
         Transfer newTransfer = account.AddTransfer(request.Type, request.Amount);
+
+        transferRepository.Add(newTransfer);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
