@@ -17,7 +17,7 @@ public static class GetClient
     internal sealed class Handler(ApplicationDbContext dbContext) : IRequestHandler<Query, Result<ClientResponse>>
     {
         public async Task<Result<ClientResponse>> Handle(Query request, CancellationToken cancellationToken)
-        {            
+        {
             var clientResponse = await dbContext
                 .Clients
                 .AsNoTracking() // Use AsNoTracking for read-only queries
@@ -49,10 +49,14 @@ public class GetClientEndpoint : ICarterModule
 
             if (result.IsFailure)
             {
-                return Results.NotFound(result.Error);
+                return Results.NoContent();
             }
 
             return Results.Ok(result.Value);
-        });
+        })
+        .WithName("GetClient")
+        .WithTags("Clients")
+        .Produces<ClientResponse>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status204NoContent);
     }
 }

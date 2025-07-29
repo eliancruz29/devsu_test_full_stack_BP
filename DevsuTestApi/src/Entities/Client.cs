@@ -31,7 +31,7 @@ public sealed class Client : Person
         Status = status;
     }
 
-    public Guid ClientId { get; private set; }
+    public Guid ClientId { get; private init; }
 
     public string Password { get; private set; } = string.Empty;
 
@@ -59,5 +59,27 @@ public sealed class Client : Person
             new Guid(),
             password,
             Status.Active);
+    }
+
+    public void Update(
+        string name,
+        Gender gender,
+        DateTime dateOfBirth,
+        string identification,
+        string address,
+        string phoneNumber,
+        string password,
+        Status status)
+    {
+        Update(
+            name,
+            gender,
+            dateOfBirth,
+            identification,
+            address,
+            phoneNumber);
+        
+        Password = password;
+        Status = status;
     }
 }

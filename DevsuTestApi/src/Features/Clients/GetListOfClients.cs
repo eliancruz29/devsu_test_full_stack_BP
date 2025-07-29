@@ -49,10 +49,14 @@ public class GetListOfClientsEndpoint : ICarterModule
 
             if (result.IsFailure)
             {
-                return Results.NotFound(result.Error);
+                return Results.NoContent();
             }
 
             return Results.Ok(result.Value);
-        });
+        })
+        .WithName("GetListOfClients")
+        .WithTags("Clients")
+        .Produces<List<ClientResponse>>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status204NoContent);
     }
 }

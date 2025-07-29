@@ -1,19 +1,21 @@
 using Carter;
 using DevsuTestApi.Contracts.Clients;
 using DevsuTestApi.Database;
-using DevsuTestApi.Entities;
 using DevsuTestApi.Enums;
 using DevsuTestApi.Shared;
 using FluentValidation;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevsuTestApi.Features.Clients;
 
-public static class CreateClient
+public static class UpdateClient
 {
-    public class Command : IRequest<Result<Guid>>
+    public class Command : IRequest<Result<ClientResponse>>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public Gender Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -21,6 +23,7 @@ public static class CreateClient
         public string Address { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public Status Status { get; set; }
     }
 
     public class Validator : AbstractValidator<Command>
@@ -40,43 +43,62 @@ public static class CreateClient
         }
     }
 
-    internal sealed class Handler(ApplicationDbContext dbContext, IValidator<Command> validator) : IRequestHandler<Command, Result<Guid>>
+    internal sealed class Handler(ApplicationDbContext dbContext, IValidator<Command> validator) : IRequestHandler<Command, Result<ClientResponse>>
     {
-        public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<ClientResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var client = await dbContext
+                .Clients
+                .Where(client => client.Id == request.Id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (client is null)
+            {
+                return Result.Failure<ClientResponse>(new Error(
+                    "UpdateClient.Null",
+                    "The client with the specified ID was not found"));
+            }
+
             var validationResult = validator.Validate(request);
             if (!validationResult.IsValid)
             {
-                return Result.Failure<Guid>(new Error(
-                    "CreateClient.Validation",
+                return Result.Failure<ClientResponse>(new Error(
+                    "UpdateClient.Validation",
                     validationResult.ToString()));
             }
 
-            var client = Client.Create(
+            client.Update(
                 request.Name,
                 request.Gender,
                 request.DateOfBirth,
                 request.Identification,
                 request.Address,
                 request.PhoneNumber,
-                request.Password);
+                request.Password,
+                request.Status);
 
-            dbContext.Add(client);
+            dbContext.Update(client);
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            return client.Id;
+            return client.Adapt<ClientResponse>();
         }
     }
 }
 
-public class CreateClientEndpoint : ICarterModule
+public class UpdateClientEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/clientes", async (CreateClientRequest request, ISender sender) =>
+        app.MapPut("api/clientes/{id:guid}", async (Guid id, [FromBody] UpdateClientRequest request, ISender sender) =>
         {
-            var command = request.Adapt<CreateClient.Command>();
+            if (id != request.Id)
+            {
+                return Results.BadRequest(new { Message = "Id in URL does not match the request body." });
+            }
+
+            var command = request.Adapt<UpdateClient.Command>();
+            command.Id = id;
 
             var result = await sender.Send(command);
 
@@ -85,11 +107,11 @@ public class CreateClientEndpoint : ICarterModule
                 return Results.BadRequest(result.Error);
             }
 
-            return Results.Ok(result.Value);
+            return Results.NoContent();
         })
-        .WithName("CreateClient")
+        .WithName("UpdateClient")
         .WithTags("Clients")
-        .Produces<Guid>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status204NoContent)
         .Produces(StatusCodes.Status400BadRequest);
     }
 }
