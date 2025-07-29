@@ -11,7 +11,7 @@ public class ClientResponse
     public string Identification { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
-    public Guid ClientId { get; private set; }
-    public string Password { get; private set; } = string.Empty;
-    public Status Status { get; private set; }
+    public Guid ClientId { get; set; }
+    public string Password { get; set; } = string.Empty;
+    public Status Status { get; set; }
 }

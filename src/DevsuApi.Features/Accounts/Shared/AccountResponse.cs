@@ -9,5 +9,5 @@ public class AccountResponse
     public string AccountNumber { get; set; } = string.Empty;
     public AccountTypes Type { get; set; }
     public int OpeningBalance { get; set; }
-    public Status Status { get; private set; }
+    public Status Status { get; set; }
 }
