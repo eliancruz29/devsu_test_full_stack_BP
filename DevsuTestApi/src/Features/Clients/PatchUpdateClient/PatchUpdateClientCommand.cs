@@ -1,8 +1,11 @@
 using DevsuTestApi.Enums;
+using DevsuTestApi.Features.Clients.Shared;
+using DevsuTestApi.Shared;
+using MediatR;
 
-namespace DevsuTestApi.Contracts.Clients;
+namespace DevsuTestApi.Features.Clients.PatchUpdateClient;
 
-public class PatchUpdateClientRequest
+public class PatchUpdateClientCommand : IRequest<Result<ClientResponse>>
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }

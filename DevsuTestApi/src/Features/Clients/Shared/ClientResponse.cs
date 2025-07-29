@@ -1,8 +1,8 @@
 using DevsuTestApi.Enums;
 
-namespace DevsuTestApi.Contracts.Clients;
+namespace DevsuTestApi.Features.Clients.Shared;
 
-public class UpdateClientRequest
+public class ClientResponse
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -11,6 +11,7 @@ public class UpdateClientRequest
     public string Identification { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
-    public Status Status { get; set; }
+    public Guid ClientId { get; private set; }
+    public string Password { get; private set; } = string.Empty;
+    public Status Status { get; private set; }
 }
