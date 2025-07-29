@@ -13,7 +13,7 @@ public class PatchUpdateClientEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPatch("api/clientes/{id:guid}", async (Guid id, [FromBody] PatchUpdateClientRequest request, ISender sender) =>
+        app.MapPatch("api/clients/{id:guid}", async (Guid id, [FromBody] PatchUpdateClientRequest request, ISender sender) =>
         {
             if (id != request.Id)
             {

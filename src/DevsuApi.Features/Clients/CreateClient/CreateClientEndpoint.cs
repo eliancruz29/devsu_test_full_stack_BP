@@ -12,7 +12,7 @@ public class CreateClientEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/clientes", async (CreateClientRequest request, ISender sender) =>
+        app.MapPost("api/clients", async (CreateClientRequest request, ISender sender) =>
         {
             var command = request.Adapt<CreateClientCommand>();
 

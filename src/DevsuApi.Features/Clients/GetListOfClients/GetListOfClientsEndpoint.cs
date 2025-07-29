@@ -11,7 +11,7 @@ public class GetListOfClientsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {        
-        app.MapGet("api/clientes", async (ISender sender) =>
+        app.MapGet("api/clients", async (ISender sender) =>
         {
             var query = new GetListOfClientsQuery();
 
