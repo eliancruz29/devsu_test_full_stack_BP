@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DevsuTestApi\DevsuTestApi.csproj" />
+    <ProjectReference Include="../../src/DevsuApi.Api/DevsuApi.Api.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,6 @@
+@DevsuApi.Api_HostAddress = http://localhost:5002
+
+GET {{DevsuApi.Api_HostAddress}}/swagger/
+Accept: application/json
+
+###

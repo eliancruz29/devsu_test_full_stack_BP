@@ -20,6 +20,6 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
         var content = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("Hello from DevsuTestApi!", content);
+        Assert.Equal("Hello from DevsuApi!", content);
     }
 }
