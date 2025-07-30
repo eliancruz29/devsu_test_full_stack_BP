@@ -10,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole(); // logs to stdout
+builder.Logging.AddDebug();   // optional for dev/debug
+
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddFeatures();
 builder.Services.AddCarter();
