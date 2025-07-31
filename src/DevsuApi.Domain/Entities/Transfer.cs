@@ -30,19 +30,27 @@ public sealed class Transfer : BaseEntity
     public int Amount { get; private set; }
 
     public int Balance { get; private set; }
-    
+
     public static Transfer Create(
         Guid accountId,
         TransferTypes type,
         int amount,
         int balance)
     {
-        return new (
+        return new(
             Guid.NewGuid(),
             accountId,
             DateTime.Now,
             type,
             amount,
             balance);
+    }
+
+    public void Update(
+        TransferTypes type,
+        int amount)
+    {
+        Type = type;
+        Amount = amount;
     }
 }
