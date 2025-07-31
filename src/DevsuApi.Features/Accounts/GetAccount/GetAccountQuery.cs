@@ -1,5 +1,5 @@
-using DevsuApi.Features.Accounts.Shared;
 using DevsuApi.Domain.Shared;
+using DevsuApi.Features.Accounts.Shared;
 using MediatR;
 
 namespace DevsuApi.Features.Accounts.GetAccount;
