@@ -1,9 +1,6 @@
+using DevsuApi.Domain.Entities;
+using DevsuApi.Domain.Exceptions.Shared;
+
 namespace DevsuApi.Domain.Exceptions.Accounts;
 
-public sealed class AccountNotFoundException : Exception
-{
-    public AccountNotFoundException(Guid id)
-        : base($"The account with the ID = {id} was not found")
-    {
-    }
-}
+public sealed class AccountNotFoundException(Guid id) : NotFoundBaseException(nameof(Account), id) { }
