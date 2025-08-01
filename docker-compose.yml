@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: backend/src/Dockerfile
+    container_name: devsu-api
     ports:
       - "5002:5002"
     depends_on:
@@ -22,6 +23,15 @@ services:
       - "11433:1433"
     volumes:
       - sql_data:/var/opt/mssql
+
+  app:
+    build:
+      context: ./frontend
+    container_name: devsu-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
 
 volumes:
   sql_data:
