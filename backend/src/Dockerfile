@@ -6,10 +6,10 @@ EXPOSE 443
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /tempSrc
-COPY ["src/.", "tempSrc/"]
+COPY ["backend/src/.", "tempSrc/"]
 RUN dotnet restore "tempSrc/DevsuApi.Api/DevsuApi.Api.csproj"
 
-COPY src/. .
+COPY backend/src/. .
 WORKDIR "/tempSrc"
 RUN dotnet publish "DevsuApi.Api/DevsuApi.Api.csproj" -c Release -o /app/publish
 

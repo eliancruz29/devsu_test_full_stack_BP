@@ -12,7 +12,7 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
 1. Clone the repository:  
    `git clone https://github.com/yourusername/devsu_test_full_stack_BP.git`
 2. Navigate to the project directory:  
-   `cd devsu_test_full_stack_BP/src/DevsuApi.Api`
+   `cd devsu_test_full_stack_BP/backend/src/DevsuApi.Api`
 3. Restore dependencies:  
    `dotnet restore`
 4. Navigate to the ROOT directory:  
@@ -56,7 +56,9 @@ Swagger UI is available at `/swagger` in development mode.
 
 **Project Structure:**
 
-`` src/
+``
+backend/
+   src/
       DevsuApi.Api/
          Middlewares/
          Program.cs
@@ -83,7 +85,7 @@ Swagger UI is available at `/swagger` in development mode.
       DevsuApi.SharedKernel/
          BaseEntity.cs
          IDomainEvent.cs
-      tests/
-         DevsuApi.UnitTests/
-         DevsuApi.IntegrationTests/
-   ``
+   tests/
+      DevsuApi.UnitTests/
+      DevsuApi.IntegrationTests/
+``
