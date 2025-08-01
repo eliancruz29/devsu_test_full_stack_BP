@@ -2,7 +2,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: src/Dockerfile
+      dockerfile: backend/src/Dockerfile
     ports:
       - "5002:5002"
     depends_on:
