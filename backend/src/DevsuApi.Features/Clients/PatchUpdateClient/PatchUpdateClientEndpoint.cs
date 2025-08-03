@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 
 namespace DevsuApi.Features.Clients.PatchUpdateClient;
 
@@ -13,24 +14,36 @@ public class PatchUpdateClientEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPatch("api/clients/{id:guid}", async (Guid id, [FromBody] PatchUpdateClientRequest request, ISender sender) =>
+        app.MapPatch("api/clients/{id:guid}", async (Guid id, [FromBody] PatchUpdateClientRequest request, ISender sender, ILogger<PatchUpdateClientEndpoint> looger) =>
         {
-            if (id != request.Id)
+            try
             {
-                return Results.BadRequest(new { Message = "Id in URL does not match the request body." });
+                if (id != request.Id)
+                {
+                    return Results.BadRequest(new { Message = "Id in URL does not match the request body." });
+                }
+
+                var command = request.Adapt<PatchUpdateClientCommand>();
+                command.Id = id;
+
+                var result = await sender.Send(command);
+
+                if (result.IsFailure)
+                {
+                    return Results.BadRequest(result.Error);
+                }
+
+                return Results.NoContent();
             }
-
-            var command = request.Adapt<PatchUpdateClientCommand>();
-            command.Id = id;
-
-            var result = await sender.Send(command);
-
-            if (result.IsFailure)
+            catch (ValidationException ex)
             {
-                return Results.BadRequest(result.Error);
+                return Results.BadRequest(ex.Message);
             }
-
-            return Results.NoContent();
+            catch (Exception ex)
+            {
+                looger.LogError(ex, "An error occurred while patch updating a client.");
+                return Results.BadRequest("An unexpected error occurred.");
+            }
         })
         .WithName("PatchUpdateClient")
         .WithTags("Clients")
