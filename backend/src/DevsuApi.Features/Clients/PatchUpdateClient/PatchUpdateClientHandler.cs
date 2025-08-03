@@ -34,13 +34,13 @@ public sealed class PatchUpdateClientHandler(
         }
 
         existantClient.Update(
-            request.Name ?? existantClient.Name,
+            string.IsNullOrWhiteSpace(request.Name) ? existantClient.Name : request.Name,
             request.Gender ?? existantClient.Gender,
             request.DateOfBirth ?? existantClient.DateOfBirth,
-            request.Identification ?? existantClient.Identification,
-            request.Address ?? existantClient.Address,
-            request.PhoneNumber ?? existantClient.PhoneNumber,
-            request.Password ?? existantClient.Password,
+            string.IsNullOrWhiteSpace(request.Identification) ? existantClient.Identification : request.Identification,
+            string.IsNullOrWhiteSpace(request.Address) ? existantClient.Address : request.Address,
+            string.IsNullOrWhiteSpace(request.PhoneNumber) ? existantClient.PhoneNumber : request.PhoneNumber,
+            string.IsNullOrWhiteSpace(request.Password) ? existantClient.Password : request.Password,
             request.Status ?? existantClient.Status
         );
 
