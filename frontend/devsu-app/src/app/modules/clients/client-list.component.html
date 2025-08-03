@@ -1,7 +1,11 @@
-<div>
-  <h2>Clients</h2>
-  <button (click)="createNew()">Add New Client</button>
+<h2>Clients</h2>
 
+<div class="search-new-container">
+  <input type="text" (keyup)="searchByName($event)" placeholder="Search clients by name..." />
+  <button (click)="createNew()">Add New Client</button>
+</div>
+
+<div class="client-list-container">
   <div *ngIf="loading">Loading...</div>
   <div *ngIf="error" style="color:red">{{ error }}</div>
 

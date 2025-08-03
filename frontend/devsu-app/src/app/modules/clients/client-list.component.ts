@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { ClientResponse } from '../../core/models/client.models';
 import { ClientService } from '../../core/services/client.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-client-list',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [ClientService],
   templateUrl: './client-list.component.html',
+  styleUrl: './client-list.component.scss',
 })
 export class ClientListComponent implements OnInit {
   clients: ClientResponse[] = [];
@@ -36,6 +38,12 @@ export class ClientListComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  searchByName(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      console.log('Enter pressed');
+    }
   }
 
   editClient(id: string): void {
