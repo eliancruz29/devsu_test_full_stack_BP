@@ -1,0 +1,73 @@
+<h2>{{ clientId ? 'Edit Client' : 'New Client' }}</h2>
+
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="error" style="color:red">{{ error }}</div>
+
+    <div class="form-group">
+        <label for="name">Name *</label>
+        <input id="name" type="text" formControlName="name" />
+        <div class="error-message" *ngIf="clientForm.get('name')?.invalid && clientForm.get('name')?.touched">
+            Name is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Gender *</label>
+        <select id="gender" formControlName="gender">
+            <option [value]="null">--Select Gender--</option>
+            <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
+        </select>
+        <div class="error-message" *ngIf="clientForm.get('gender')?.invalid && clientForm.get('gender')?.touched">
+            Gender is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="dateOfBirth">Date of Birth *</label>
+        <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
+        <div class="error-message"
+            *ngIf="clientForm.get('dateOfBirth')?.invalid && clientForm.get('dateOfBirth')?.touched">
+            Date of Birth is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="identification">Identification *</label>
+        <input id="identification" type="text" formControlName="identification" />
+        <div class="error-message"
+            *ngIf="clientForm.get('identification')?.invalid && clientForm.get('identification')?.touched">
+            Identification is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="address">Address *</label>
+        <input id="address" type="text" formControlName="address" />
+        <div class="error-message" *ngIf="clientForm.get('address')?.invalid && clientForm.get('address')?.touched">
+            Address is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number *</label>
+        <input id="phoneNumber" type="text" formControlName="phoneNumber" />
+        <div class="error-message"
+            *ngIf="clientForm.get('phoneNumber')?.invalid && clientForm.get('phoneNumber')?.touched">
+            Phone Number is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password *</label>
+        <input id="password" type="password" formControlName="password" />
+        <div class="error-message" *ngIf="clientForm.get('password')?.invalid && clientForm.get('password')?.touched">
+            Password is required.
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="button" (click)="onCancel()" [disabled]="loading">Cancel</button>
+        <button type="submit" [disabled]="loading || clientForm.invalid">{{ loading ? " ... " : clientId ? 'Update' : 'Create' }}</button>
+    </div>
+</form>

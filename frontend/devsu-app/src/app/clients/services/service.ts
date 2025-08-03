@@ -23,7 +23,7 @@ export class ClientService {
     return this.http.get<ClientResponse>(`${this.api}/${id}`);
   }
 
-  create(client: Omit<CreateClientRequest, 'id'>): Observable<string> {
+  create(client: CreateClientRequest): Observable<string> {
     return this.http.post<string>(this.api, client);
   }
 
