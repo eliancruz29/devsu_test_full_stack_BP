@@ -19,6 +19,22 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddFeatures();
 builder.Services.AddCarter();
 
+// Bind CORS settings from config
+string[] allowedOrigins = builder.Configuration["CORS:AllowedOrigins"]?
+    .Split(",", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) ?? []; // Get the CORS settings from docker compose
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ConfiguredCors", policy =>
+    {
+        policy
+            .WithOrigins(allowedOrigins) // your Angular frontend origin
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +45,8 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
+
+app.UseCors("ConfiguredCors");
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
