@@ -4,12 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { ClientResponse } from "../models/response";
+import { UpdateClientRequest } from "../models/update.client.request";
 
 @Injectable()
 export class ClientService {
   private readonly api = `${environment.apiUrl}/clients`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<ClientResponse[]> {
     return this.http.get<ClientResponse[]>(this.api);
@@ -27,8 +28,12 @@ export class ClientService {
     return this.http.post<string>(this.api, client);
   }
 
-  update(id: string, client: Partial<CreateClientRequest>): Observable<void> {
+  update(id: string, client: UpdateClientRequest): Observable<void> {
     return this.http.put<void>(`${this.api}/${id}`, client);
+  }
+
+  partialUpdate(id: string, client: Partial<UpdateClientRequest>): Observable<void> {
+    return this.http.patch<void>(`${this.api}/${id}`, client);
   }
 
   delete(id: string): Observable<void> {

@@ -5,7 +5,7 @@
     <div *ngIf="error" style="color:red">{{ error }}</div>
 
     <div class="form-group">
-        <label for="name">Name *</label>
+        <label for="name">Name {{clientId ? '' : '*'}}</label>
         <input id="name" type="text" formControlName="name" />
         <div class="error-message" *ngIf="clientForm.get('name')?.invalid && clientForm.get('name')?.touched">
             Name is required.
@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group">
-        <label for="gender">Gender *</label>
+        <label for="gender">Gender {{clientId ? '' : '*'}}</label>
         <select id="gender" formControlName="gender">
             <option [value]="null">--Select Gender--</option>
             <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group">
-        <label for="dateOfBirth">Date of Birth *</label>
+        <label for="dateOfBirth">Date of Birth {{clientId ? '' : '*'}}</label>
         <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
         <div class="error-message"
             *ngIf="clientForm.get('dateOfBirth')?.invalid && clientForm.get('dateOfBirth')?.touched">
@@ -33,7 +33,7 @@
     </div>
 
     <div class="form-group">
-        <label for="identification">Identification *</label>
+        <label for="identification">Identification {{clientId ? '' : '*'}}</label>
         <input id="identification" type="text" formControlName="identification" />
         <div class="error-message"
             *ngIf="clientForm.get('identification')?.invalid && clientForm.get('identification')?.touched">
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <label for="address">Address *</label>
+        <label for="address">Address {{clientId ? '' : '*'}}</label>
         <input id="address" type="text" formControlName="address" />
         <div class="error-message" *ngIf="clientForm.get('address')?.invalid && clientForm.get('address')?.touched">
             Address is required.
@@ -50,7 +50,7 @@
     </div>
 
     <div class="form-group">
-        <label for="phoneNumber">Phone Number *</label>
+        <label for="phoneNumber">Phone Number {{clientId ? '' : '*'}}</label>
         <input id="phoneNumber" type="text" formControlName="phoneNumber" />
         <div class="error-message"
             *ngIf="clientForm.get('phoneNumber')?.invalid && clientForm.get('phoneNumber')?.touched">
@@ -59,7 +59,7 @@
     </div>
 
     <div class="form-group">
-        <label for="password">Password *</label>
+        <label for="password">Password {{clientId ? '' : '*'}}</label>
         <input id="password" type="password" formControlName="password" />
         <div class="error-message" *ngIf="clientForm.get('password')?.invalid && clientForm.get('password')?.touched">
             Password is required.

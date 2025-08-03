@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { ClientService } from '../../services/service';
 import { CommonModule } from '@angular/common';
 import { EnumObject } from '../../../core/enums/enum-object';
-import { isErrorResponse } from '../../../core/helpers/interface.helper';
+import { areAllPropertiesFulfilled, isErrorResponse } from '../../../core/helpers/interface.helper';
 import { getGenderAsEnumObjectOptions } from '../../../core/helpers/enum.helper';
 
 @Component({
@@ -34,13 +34,13 @@ export class ClientFormComponent implements OnInit {
     this.genders = getGenderAsEnumObjectOptions()
 
     this.clientForm = this.fb.group({
-      name: ['', Validators.required],
-      gender: [null, Validators.required],
-      dateOfBirth: [null, Validators.required],
-      identification: ['', Validators.required],
-      address: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      password: ['', Validators.required],
+      name: this.clientId ? [''] : ['', Validators.required],
+      gender: this.clientId ? [null] : [null, Validators.required],
+      dateOfBirth: this.clientId ? [null] : [null, Validators.required],
+      identification: this.clientId ? [''] : ['', Validators.required],
+      address: this.clientId ? [''] : ['', Validators.required],
+      phoneNumber: this.clientId ? [''] : ['', Validators.required],
+      password: this.clientId ? [''] : ['', Validators.required],
     });
 
     if (this.clientId) {
@@ -76,31 +76,35 @@ export class ClientFormComponent implements OnInit {
     const formValue = this.clientForm.value;
     formValue.gender = +formValue.gender; // Convert to number
     this.loading = true;
+
+    const handleSuccess = () => {
+      this.router.navigate(['/clients']);
+    };
+
+    const handleError = (err: any) => {
+      this.error = 'Failed to create client';
+      console.log(isErrorResponse(err.error), err.error);
+      if (isErrorResponse(err.error)) {
+        this.error += `: ${err.error.message}`;
+      }
+    };
+
     if (this.clientId) {
-      this.clientService.update(this.clientId, formValue).subscribe({
-        next: () => {
-          this.loading = false;
-          this.router.navigate(['/clients']);
-        },
-        error: () => {
-          this.error = 'Failed to update client';
-          this.loading = false;
-        },
-      });
+      formValue.id = this.clientId; // Add id for update
+      const handlers = { next: handleSuccess, error: handleError }
+
+      if (areAllPropertiesFulfilled(formValue)) {
+        this.clientService.update(this.clientId, formValue).subscribe(handlers);
+      } else {
+        this.clientService.partialUpdate(this.clientId, formValue).subscribe(handlers);
+      }
     } else {
       this.clientService.create(formValue).subscribe({
-        next: () => {
+        next: handleSuccess,
+        error: handleError,
+        complete: () => {
           this.loading = false;
-          this.router.navigate(['/clients']);
-        },
-        error: (err) => {
-          this.error = 'Failed to create client';
-          console.log(isErrorResponse(err.error), err.error);
-          if (isErrorResponse(err.error)) {
-            this.error += `: ${err.error.message}`;
-          }
-          this.loading = false;
-        },
+        }
       });
     }
   }
