@@ -31,10 +31,11 @@ export class ClientListComponent implements OnInit {
     this.clientService.getAll().subscribe({
       next: (data) => {
         this.clients = data;
-        this.loading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load clients.';
+        this.error = `Failed to load clients by ${this.searchByName} term.`;
+      },
+      complete: () => {
         this.loading = false;
       },
     });
@@ -42,7 +43,18 @@ export class ClientListComponent implements OnInit {
 
   searchByName(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
-      console.log('Enter pressed');
+      this.loading = true;
+      const searchTerm = (event.target as HTMLInputElement).value.trim();
+      this.clientService.searchByName(searchTerm).subscribe({
+        next: (data) => {
+          this.clients = data;
+          this.loading = false;
+        },
+        error: (err) => {
+          this.error = 'Failed to search clients.';
+          this.loading = false;
+        },
+      });
     }
   }
 

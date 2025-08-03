@@ -14,6 +14,10 @@ export class ClientService {
     return this.http.get<ClientResponse[]>(this.api);
   }
 
+  searchByName(searchTerm: string) {
+    return this.http.get<ClientResponse[]>(`${this.api}?searchByName=${searchTerm}`);
+  }
+
   getById(id: string): Observable<ClientResponse> {
     return this.http.get<ClientResponse>(`${this.api}/${id}`);
   }
