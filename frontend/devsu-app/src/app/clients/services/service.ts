@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { ClientResponse, CreateClientRequest } from "../models/client.models";
+import { CreateClientRequest } from "../models/create.request";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
+import { ClientResponse } from "../models/response";
 
 @Injectable()
 export class ClientService {

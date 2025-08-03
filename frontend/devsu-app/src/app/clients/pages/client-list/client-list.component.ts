@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClientResponse } from '../../core/models/client.models';
-import { ClientService } from '../../core/services/client.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ClientService } from '../../services/service';
+import { ClientResponse } from '../../models/response';
 
 @Component({
   selector: 'app-client-list',
