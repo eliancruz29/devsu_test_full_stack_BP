@@ -1,0 +1,18 @@
+.main-header {
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid lightgrey;
+
+    h1 {
+        font-size: 1.5rem;
+        color: darkblue;
+        margin: 0;
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}
