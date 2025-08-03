@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ClientService } from '../../services/service';
+import { ClientService } from '../../services/client.service';
 import { CommonModule } from '@angular/common';
 import { EnumObject } from '../../../core/enums/enum-object';
 import { areAllPropertiesFulfilled, isErrorResponse } from '../../../core/helpers/interface.helper';

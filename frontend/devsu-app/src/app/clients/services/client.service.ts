@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { CreateClientRequest } from "../models/create.request";
+import { CreateClientRequest } from "../models/create.client.request";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
-import { ClientResponse } from "../models/response";
+import { ClientResponse } from "../models/client.response";
 import { UpdateClientRequest } from "../models/update.client.request";
 
 @Injectable()

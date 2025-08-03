@@ -6,8 +6,10 @@ import { ClientFormComponent } from './clients/pages/client-form/client-form.com
 
 export const routes: Routes = [
   { path: '', title: 'Home Page', component: HomeComponent },
+  
   { path: 'clients', title: 'Client Page', component: ClientListComponent },
   { path: 'clients/new', component: ClientFormComponent },
   { path: 'clients/edit/:id', component: ClientFormComponent },
+
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
