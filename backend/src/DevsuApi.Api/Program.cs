@@ -20,8 +20,9 @@ builder.Services.AddFeatures();
 builder.Services.AddCarter();
 
 // Bind CORS settings from config
-string[] allowedOrigins = builder.Configuration["CORS:AllowedOrigins"]?
-    .Split(",", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) ?? []; // Get the CORS settings from docker compose
+string[] allowedOrigins = builder.Configuration
+    .GetSection("CORS:AllowedOrigins")
+    .Get<string[]>() ?? [];
 
 builder.Services.AddCors(options =>
 {
