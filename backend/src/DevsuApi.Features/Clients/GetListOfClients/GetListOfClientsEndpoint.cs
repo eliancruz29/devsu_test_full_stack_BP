@@ -1,5 +1,6 @@
 using Carter;
 using DevsuApi.Features.Clients.Shared;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +12,9 @@ public class GetListOfClientsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {        
-        app.MapGet("api/clients", async (ISender sender) =>
+        app.MapGet("api/clients", async ([AsParameters] GetListOfClientsRequest request, ISender sender) =>
         {
-            var query = new GetListOfClientsQuery();
+            var query = request.Adapt<GetListOfClientsQuery>();
 
             var result = await sender.Send(query);
 

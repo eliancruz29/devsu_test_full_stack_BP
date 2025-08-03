@@ -12,6 +12,8 @@ public sealed class GetListOfClientsHandler(IClientRepository clientRepository) 
     public async Task<Result<List<ClientResponse>>> Handle(GetListOfClientsQuery request, CancellationToken cancellationToken)
     {
         var clients = await clientRepository.GetAll()
+            .Where(c => string.IsNullOrWhiteSpace(request.SearchByName) || c.Name.Contains(request.SearchByName))
+            .OrderBy(c => c.Name)
             .ProjectToType<ClientResponse>()
             .ToListAsync(cancellationToken);
 
