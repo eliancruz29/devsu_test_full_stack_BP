@@ -90,16 +90,17 @@ export class ClientFormComponent implements OnInit {
       this.loading = false;
     };
 
+    const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
+
+    if (isNullOrUndefinedOrEmpty(formValue.gender)) {
+      delete formValue.gender; // Remove gender if not selected
+    } else {
+      formValue.gender = +formValue.gender; // Convert to number
+    }
+
     if (this.clientId) {
       formValue.id = this.clientId; // Add id for update
       const handlers = { next: handleSuccess, error: handleError }
-      const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
-
-      if (isNullOrUndefinedOrEmpty(formValue.gender)) {
-        delete formValue.gender; // Remove gender if not selected
-      } else {
-        formValue.gender = +formValue.gender; // Convert to number
-      }
 
       if (propertiesFulfilled) {
         this.clientService.update(this.clientId, formValue).subscribe(handlers);

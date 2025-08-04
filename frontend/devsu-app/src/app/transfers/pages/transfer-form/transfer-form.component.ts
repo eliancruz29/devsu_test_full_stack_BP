@@ -102,16 +102,17 @@ export class TransferFormComponent implements OnInit {
       this.loading = false;
     };
 
+    const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
+
+    if (isNullOrUndefinedOrEmpty(formValue.type)) {
+      delete formValue.type; // Remove type if not selected
+    } else {
+      formValue.type = +formValue.type; // Convert to number
+    }
+
     if (this.transferId) {
       formValue.id = this.transferId; // Add id for update
       const handlers = { next: handleSuccess, error: handleError }
-      const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
-
-      if (isNullOrUndefinedOrEmpty(formValue.type)) {
-        delete formValue.type; // Remove type if not selected
-      } else {
-        formValue.type = +formValue.type; // Convert to number
-      }
 
       if (propertiesFulfilled) {
         this.transferService.update(this.transferId, formValue).subscribe(handlers);

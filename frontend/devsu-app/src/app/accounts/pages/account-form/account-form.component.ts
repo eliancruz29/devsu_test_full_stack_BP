@@ -104,16 +104,17 @@ export class AccountFormComponent implements OnInit {
       this.loading = false;
     };
 
+    const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
+
+    if (isNullOrUndefinedOrEmpty(formValue.type)) {
+      delete formValue.type; // Remove type if not selected
+    } else {
+      formValue.type = +formValue.type; // Convert to number
+    }
+
     if (this.accountId) {
       formValue.id = this.accountId; // Add id for update
       const handlers = { next: handleSuccess, error: handleError }
-      const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
-
-      if (isNullOrUndefinedOrEmpty(formValue.type)) {
-        delete formValue.type; // Remove type if not selected
-      } else {
-        formValue.type = +formValue.type; // Convert to number
-      }
 
       if (propertiesFulfilled) {
         this.accountService.update(this.accountId, formValue).subscribe(handlers);
