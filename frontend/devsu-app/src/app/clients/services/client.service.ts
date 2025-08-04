@@ -16,7 +16,7 @@ export class ClientService {
     return this.http.get<ClientResponse[]>(this.api);
   }
 
-  searchByName(searchTerm: string) {
+  searchByName(searchTerm: string): Observable<ClientResponse[]> {
     return this.http.get<ClientResponse[]>(`${this.api}?searchByName=${searchTerm}`);
   }
 

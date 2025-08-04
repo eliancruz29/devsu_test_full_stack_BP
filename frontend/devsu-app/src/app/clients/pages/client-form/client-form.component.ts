@@ -78,7 +78,7 @@ export class ClientFormComponent implements OnInit {
     this.loading = true;
 
     const handleSuccess = () => {
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/clientes']);
     };
 
     const handleError = (err: any) => {
@@ -110,7 +110,7 @@ export class ClientFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/clients']);
+    this.router.navigate(['/clientes']);
   }
 }
 

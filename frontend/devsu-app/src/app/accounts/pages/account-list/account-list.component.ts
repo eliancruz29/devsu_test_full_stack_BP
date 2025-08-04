@@ -16,12 +16,9 @@ import { ClientForAccountResponse } from '../../models/client-for-account.respon
 })
 export class AccountListComponent {
   clients: ClientForAccountResponse[] = [];
-  loadingClients = false;
-  errorClients = '';
-
   accounts: AccountResponse[] = [];
-  loadingAccounts = false;
-  errorAccounts = '';
+  loading = false;
+  error = '';
 
   constructor(
     private clientService: ClientService,
@@ -35,32 +32,30 @@ export class AccountListComponent {
   }
 
   loadClients(): void {
-    this.loadingClients = true;
     this.clientService.getAll().subscribe({
       next: (data) => {
         this.clients = data;
       },
       error: (err) => {
-        this.errorClients = `Failed to load clients.`;
+        this.error = `Failed to load clients.`;
       },
       complete: () => {
         this.accounts = this.mapClientNameForAccounts(this.accounts, this.clients); // this could be done in a better way but for simplicity, we do it in this way
-        this.loadingClients = false;
       },
     });
   }
 
   loadAccounts(clientId?: string): void {
-    this.loadingAccounts = true;
+    this.loading = true;
     this.accountService.getAll(clientId).subscribe({
       next: (data) => {
         this.accounts = this.mapClientNameForAccounts(data, this.clients); // this could be done in a better way but for simplicity, we do it in this way
       },
       error: (err) => {
-        this.errorAccounts = `Failed to load accounts.`;
+        this.error = `Failed to load accounts.`;
       },
       complete: () => {
-        this.loadingAccounts = false;
+        this.loading = false;
       },
     });
   }
@@ -81,7 +76,7 @@ export class AccountListComponent {
   }
 
   editAccount(id: string): void {
-    this.router.navigate(['/accounts/edit', id]);
+    this.router.navigate(['/cuentas/editar', id]);
   }
 
   deleteAccount(id: string): void {
@@ -93,6 +88,6 @@ export class AccountListComponent {
   }
 
   createNew(): void {
-    this.router.navigate(['/accounts/new']);
+    this.router.navigate(['/cuentas/crear']);
   }
 }

@@ -4,15 +4,17 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './shared/pages/page-not-found/page-not-found.component';
 import { ClientFormComponent } from './clients/pages/client-form/client-form.component';
 import { AccountListComponent } from './accounts/pages/account-list/account-list.component';
+import { AccountFormComponent } from './accounts/pages/account-form/account-form.component';
 
 export const routes: Routes = [
-  { path: '', title: 'Home Page', component: HomeComponent },
+  { path: '', title: 'Página Inicio', component: HomeComponent },
   
-  { path: 'clients', title: 'Client Page', component: ClientListComponent },
-  { path: 'clients/new', component: ClientFormComponent },
-  { path: 'clients/edit/:id', component: ClientFormComponent },
+  { path: 'clientes', title: 'Página Clientes', component: ClientListComponent },
+  { path: 'clientes/crear', title: 'Página Crear Cliente', component: ClientFormComponent },
+  { path: 'clientes/editar/:id', title: 'Página Editar Cliente', component: ClientFormComponent },
 
-  { path: 'accounts', title: 'Account Page', component: AccountListComponent },
+  { path: 'cuentas', title: 'Página Cuentas', component: AccountListComponent },
+  { path: 'cuentas/crear', title: 'Página Crear Cuenta', component: AccountFormComponent },
 
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];

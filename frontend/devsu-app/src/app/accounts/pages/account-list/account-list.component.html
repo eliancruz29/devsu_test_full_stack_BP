@@ -10,8 +10,8 @@
 </div>
 
 <div class="account-list-container">
-    <div *ngIf="loadingAccounts">Cargando...</div>
-    <div *ngIf="errorAccounts" style="color:red">{{ errorAccounts }}</div>
+    <div *ngIf="loading">Cargando...</div>
+    <div *ngIf="error" style="color:red">{{ error }}</div>
 
     <table *ngIf="accounts.length > 0">
         <thead>
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <div *ngIf="accounts.length === 0 && !loadingAccounts">No se encontraron cuentas.</div>
+    <div *ngIf="accounts.length === 0 && !loading">No se encontraron cuentas.</div>
 </div>

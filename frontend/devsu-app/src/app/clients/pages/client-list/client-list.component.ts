@@ -59,7 +59,7 @@ export class ClientListComponent implements OnInit {
   }
 
   editClient(id: string): void {
-    this.router.navigate(['/clients/edit', id]);
+    this.router.navigate(['/clientes/editar', id]);
   }
 
   deleteClient(id: string): void {
@@ -71,6 +71,6 @@ export class ClientListComponent implements OnInit {
   }
 
   createNew(): void {
-    this.router.navigate(['/clients/new']);
+    this.router.navigate(['/clientes/crear']);
   }
 }
