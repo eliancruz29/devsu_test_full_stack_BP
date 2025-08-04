@@ -6,4 +6,5 @@ export interface AccountResponse {
   type: number;
   typeName: string;
   openingBalance: number;
+  statusName: string;
 }

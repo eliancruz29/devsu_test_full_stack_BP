@@ -5,7 +5,7 @@ namespace DevsuApi.Domain.Enums;
 public enum TransferTypes
 {
     [EnumMember(Value = "Credito")]
-    Credit = 1,
+    Credit,
     
     [EnumMember(Value = "Debito")]
     Debit

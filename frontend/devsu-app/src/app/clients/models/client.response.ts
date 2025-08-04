@@ -9,5 +9,5 @@ export interface ClientResponse {
   phoneNumber?: string;
   clientId: string;
   password?: string;
-  status: number;
+  statusName: string;
 }

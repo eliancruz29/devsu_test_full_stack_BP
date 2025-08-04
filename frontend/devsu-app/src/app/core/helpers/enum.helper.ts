@@ -5,22 +5,22 @@ import { TransferType } from "../enums/transfer-type";
 
 export function getGenderAsEnumObjectOptions(): EnumObject<number>[] {
   return [
-    { value: 1, label: Gender.Male },
-    { value: 2, label: Gender.Female },
-    { value: 3, label: Gender.NotSpecified }
+    { value: 0, label: Gender.Male },
+    { value: 1, label: Gender.Female },
+    { value: 2, label: Gender.NotSpecified }
   ];
 }
 
 export function getAccountTypeAsEnumObjectOptions(): EnumObject<number>[] {
   return [
-    { value: 1, label: AccountType.Savings },
-    { value: 2, label: AccountType.Checks }
+    { value: 0, label: AccountType.Savings },
+    { value: 1, label: AccountType.Checks }
   ];
 }
 
 export function getTransferTypeAsEnumObjectOptions(): EnumObject<number>[] {
   return [
-    { value: 1, label: TransferType.Credit },
-    { value: 2, label: TransferType.Debit }
+    { value: 0, label: TransferType.Credit },
+    { value: 1, label: TransferType.Debit }
   ];
 }

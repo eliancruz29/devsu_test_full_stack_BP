@@ -20,6 +20,7 @@
                 <th>Numero de cuenta</th>
                 <th>Tipo</th>
                 <th>Saldo Inicial</th>
+                <th>Estatus</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{ account.accountNumber }}</td>
                 <td>{{ account.typeName }}</td>
                 <td>{{ account.openingBalance | currency }}</td>
+                <td>{{ account.statusName }}</td>
                 <td>
                     <button (click)="editAccount(account.id)">Editar</button>
                     <button (click)="deleteAccount(account.id)">Borrar</button>

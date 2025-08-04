@@ -19,15 +19,6 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
    `cd devsu_test_full_stack_BP`
 5. Build & Run with Docker
 
-## Build & Run with Docker
-
-**Build the Docker image:**
-
-   ```sh
-   docker-compose build --no-cache
-   docker-compose up -d
-   ```
-
 **If EF tools are missing:**
 
    ```sh
@@ -46,14 +37,6 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
 
    dotnet ef database update --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --verbose
    ```
-
-**Run the Docker container:**
-
-Visit [http://localhost:5002](http://localhost:5002) to access the API.
-
-## Swagger
-
-Swagger UI is available at `/swagger` in development mode.
 
 ---
 

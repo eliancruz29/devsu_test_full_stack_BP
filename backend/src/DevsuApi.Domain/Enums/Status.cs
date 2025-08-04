@@ -5,7 +5,7 @@ namespace DevsuApi.Domain.Enums;
 public enum Status
 {
     [EnumMember(Value = "Activo")]
-    Active = 1,
+    Active,
     
     [EnumMember(Value = "Inactivo")]
     Inactive

@@ -5,7 +5,7 @@ namespace DevsuApi.Domain.Enums;
 public enum AccountTypes
 {
     [EnumMember(Value = "Ahorro")]
-    Savings = 1,
+    Savings,
     
     [EnumMember(Value = "Corriente")]
     Checks

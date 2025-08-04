@@ -19,6 +19,7 @@
         <th>Dirección</th>
         <th>Numero de teléfono</th>
         <th>Contraseña</th>
+        <th>Estatus</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -31,6 +32,7 @@
         <td>{{ client.address }}</td>
         <td>{{ client.phoneNumber }}</td>
         <td>{{ client.password }}</td>
+        <td>{{ client.statusName }}</td>
         <td>
           <button (click)="editClient(client.id)">Editar</button>
           <button (click)="deleteClient(client.id)">Borrar</button>

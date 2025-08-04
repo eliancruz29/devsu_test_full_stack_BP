@@ -5,7 +5,7 @@ namespace DevsuApi.Domain.Enums;
 public enum Gender
 {
     [EnumMember(Value = "Masculino")]
-    Male = 1,
+    Male,
     
     [EnumMember(Value = "Femenino")]
     Female,

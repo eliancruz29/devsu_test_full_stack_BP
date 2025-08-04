@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'PLACEHOLDER_API_URL/api'
+  apiUrl: 'http://localhost:5002/api'
 };
