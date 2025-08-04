@@ -1,0 +1,45 @@
+<h2>Movimientos</h2>
+
+<div class="search-new-container">
+    <select (change)="onSelectChange($event)">
+        <option [value]="''">--Filtrar por cuenta--</option>
+        <option *ngFor="let c of accounts" [value]="c.id">{{ c.accountNumber }}</option>
+    </select>
+
+    <button (click)="createNew()">Agregar nuevo movimiento</button>
+</div>
+
+<div class="transfer-list-container">
+    <div *ngIf="loading">Cargando...</div>
+    <div *ngIf="error" style="color:red">{{ error }}</div>
+
+    <table *ngIf="transfers.length > 0">
+        <thead>
+            <tr>
+                <th>Numero de cuenta</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Saldo disponible</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transfer of transfers">
+                <td>{{ transfer.accountNumber }}</td>
+                <td>{{ transfer.date | date: 'MMM dd, yyyy HH:mm:ss a' }}</td>
+                <td>{{ transfer.typeName }}</td>
+                <td>{{ transfer.amount | currency }}</td>
+                <td>{{ transfer.balance | currency }}</td>
+                <td>{{ transfer.statusName }}</td>
+                <td>
+                    <button (click)="editTransfer(transfer.id)">Editar</button>
+                    <button (click)="deleteTransfer(transfer.id)">Borrar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="transfers.length === 0 && !loading">No se encontraron movimientos.</div>
+</div>

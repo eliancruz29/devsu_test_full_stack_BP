@@ -1,0 +1,53 @@
+<h2>{{ accountId ? 'Editar cuenta' : 'Nueva cuenta' }}</h2>
+
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="error" style="color:red">{{ error }}</div>
+
+    <div class="form-group" *ngIf="!accountId">
+        <label for="clientId">Cliente {{accountId ? '' : '*'}}</label>
+        <select id="clientId" formControlName="clientId">
+            <option [value]="''">--Seleccionar cliente--</option>
+            <option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</option>
+        </select>
+        <div class="error-message" *ngIf="accountForm.get('clientId')?.invalid && accountForm.get('clientId')?.touched">
+            El cliente es requerido.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="accountNumber">Número de cuenta {{accountId ? '' : '*'}}</label>
+        <input id="accountNumber" type="text" formControlName="accountNumber" />
+        <div class="error-message"
+            *ngIf="accountForm.get('accountNumber')?.invalid && accountForm.get('accountNumber')?.touched">
+            El número de cuenta es requerido.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="type">Tipo de cuenta {{accountId ? '' : '*'}}</label>
+        <select id="type" formControlName="type">
+            <option [value]="null">--Seleccionar tipo de cuenta--</option>
+            <option *ngFor="let at of accountTypes" [value]="at.value">{{ at.label }}</option>
+        </select>
+        <div class="error-message" *ngIf="accountForm.get('type')?.invalid && accountForm.get('type')?.touched">
+            El tipo de cuenta es requerido.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="openingBalance">Saldo inicial {{accountId ? '' : '*'}}</label>
+        <input id="openingBalance" type="number" formControlName="openingBalance" />
+        <div class="error-message"
+            *ngIf="accountForm.get('openingBalance')?.invalid && accountForm.get('openingBalance')?.touched">
+            El saldo inicial es requerida.
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="button" (click)="onCancel()" [disabled]="loading">Cancelar</button>
+        <button type="submit" [disabled]="loading || accountForm.invalid">{{ loading ? " ... " : accountId ?
+            'Actualizar' :
+            'Crear' }}</button>
+    </div>
+</form>

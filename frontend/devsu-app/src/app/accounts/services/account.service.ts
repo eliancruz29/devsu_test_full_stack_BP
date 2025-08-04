@@ -21,16 +21,16 @@ export class AccountService {
     return this.http.get<AccountResponse>(`${this.api}/${id}`);
   }
 
-  create(client: CreateAccountRequest): Observable<string> {
-    return this.http.post<string>(this.api, client);
+  create(account: CreateAccountRequest): Observable<string> {
+    return this.http.post<string>(this.api, account);
   }
 
-  update(id: string, client: UpdateAccountRequest): Observable<void> {
-    return this.http.put<void>(`${this.api}/${id}`, client);
+  update(id: string, account: UpdateAccountRequest): Observable<void> {
+    return this.http.put<void>(`${this.api}/${id}`, account);
   }
 
-  partialUpdate(id: string, client: Partial<UpdateAccountRequest>): Observable<void> {
-    return this.http.patch<void>(`${this.api}/${id}`, client);
+  partialUpdate(id: string, account: Partial<UpdateAccountRequest>): Observable<void> {
+    return this.http.patch<void>(`${this.api}/${id}`, account);
   }
 
   delete(id: string): Observable<void> {
