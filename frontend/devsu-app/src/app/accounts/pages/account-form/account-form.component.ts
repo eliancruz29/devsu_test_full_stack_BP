@@ -60,7 +60,7 @@ export class AccountFormComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = `Failed to load clients.`;
+        this.error = `Error al cargar los clientes.`;
         this.loading = false;
       }
     });
@@ -79,7 +79,7 @@ export class AccountFormComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Failed to load account';
+        this.error = 'Error al cargar la cuenta.';
         this.loading = false;
       },
     });
@@ -97,7 +97,7 @@ export class AccountFormComponent implements OnInit {
     };
 
     const handleError = (err: any) => {
-      this.error = 'Failed to create account';
+      this.error = 'Error al crear la cuenta.';
       if (isErrorResponse(err.error)) {
         this.error += `: ${err.error.message}`;
       }

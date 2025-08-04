@@ -59,7 +59,7 @@ export class TransferFormComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = `Failed to load accounts.`;
+        this.error = `Error al cargar las cuentas.`;
         this.loading = false;
       },
     });
@@ -77,7 +77,7 @@ export class TransferFormComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Failed to load transfer';
+        this.error = 'Error al cargar el movimiento.';
         this.loading = false;
       },
     });
@@ -95,7 +95,7 @@ export class TransferFormComponent implements OnInit {
     };
 
     const handleError = (err: any) => {
-      this.error = 'Failed to create transfer';
+      this.error = 'Error al crear el movimiento.';
       if (isErrorResponse(err.error)) {
         this.error += `: ${err.error.message}`;
       }

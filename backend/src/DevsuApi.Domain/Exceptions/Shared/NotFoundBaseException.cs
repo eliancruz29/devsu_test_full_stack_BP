@@ -1,3 +1,3 @@
 namespace DevsuApi.Domain.Exceptions.Shared;
 
-public abstract class NotFoundBaseException(string modelType, Guid id) : Exception($"The {modelType} with the ID = {id} was not found") { }
+public abstract class NotFoundBaseException(string modelType, Guid id) : Exception($"El modelo {modelType} con el ID = {id} no existe.") { }

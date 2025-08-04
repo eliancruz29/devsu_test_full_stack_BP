@@ -38,7 +38,7 @@ export class TransferListComponent {
         this.transfers = this.mapAccountNameForTransfers(this.transfers, this.accounts); // this could be done in a better way but for simplicity, we do it in this way
       },
       error: (err) => {
-        this.error = `Failed to load accounts.`;
+        this.error = `Error al cargar las cuentas.`;
       },
     });
   }
@@ -51,7 +51,7 @@ export class TransferListComponent {
         this.loading = false;
       },
       error: (err) => {
-        this.error = `Failed to load transfers.`;
+        this.error = `Error al cargar los movimientos.`;
         this.loading = false;
       },
     });
@@ -62,7 +62,7 @@ export class TransferListComponent {
       const account = accounts.find(a => a.id === transfer.accountId);
       return {
         ...transfer,
-        accountNumber: account ? account.accountNumber : 'Unknown Account'
+        accountNumber: account ? account.accountNumber : 'Cuenta desconocida'
       };
     });
   }
@@ -77,7 +77,7 @@ export class TransferListComponent {
   }
 
   deleteTransfer(id: string): void {
-    if (confirm('Are you sure you want to delete this transfer?')) {
+    if (confirm('Estas seguro que quiere borrar este Movimiento?')) {
       this.transferService.delete(id).subscribe(() => {
         this.loadTransfers();
       });

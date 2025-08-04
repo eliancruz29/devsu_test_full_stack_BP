@@ -38,7 +38,7 @@ export class AccountListComponent {
         this.accounts = this.mapClientNameForAccounts(this.accounts, this.clients); // this could be done in a better way but for simplicity, we do it in this way
       },
       error: (err) => {
-        this.error = `Failed to load clients.`;
+        this.error = `Error al cargar los clientes.`;
       },
     });
   }
@@ -51,7 +51,7 @@ export class AccountListComponent {
         this.loading = false;
       },
       error: (err) => {
-        this.error = `Failed to load accounts.`;
+        this.error = `Error al cargar las cuentas.`;
         this.loading = false;
       },
     });
@@ -62,7 +62,7 @@ export class AccountListComponent {
       const client = clients.find(c => c.id === account.clientId);
       return {
         ...account,
-        clientName: client ? client.name : 'Unknown Client'
+        clientName: client ? client.name : 'Cliente desconocido'
       };
     });
   }
@@ -77,7 +77,7 @@ export class AccountListComponent {
   }
 
   deleteAccount(id: string): void {
-    if (confirm('Are you sure you want to delete this account?')) {
+    if (confirm('Estas seguro que quiere borrar esta Cuenta?')) {
       this.accountService.delete(id).subscribe(() => {
         this.loadAccounts();
       });

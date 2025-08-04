@@ -34,7 +34,7 @@ export class ClientListComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = `Failed to load clients.`;
+        this.error = `Error al cargar los clientes.`;
         this.loading = false;
       },
     });
@@ -50,7 +50,7 @@ export class ClientListComponent implements OnInit {
           this.loading = false;
         },
         error: (err) => {
-          this.error = 'Failed to search clients.';
+          this.error = 'Errora al buscar los clientes.';
           this.loading = false;
         },
       });
@@ -62,7 +62,7 @@ export class ClientListComponent implements OnInit {
   }
 
   deleteClient(id: string): void {
-    if (confirm('Are you sure you want to delete this client?')) {
+    if (confirm('Estas seguro que quiere borrar este Cliente?')) {
       this.clientService.delete(id).subscribe(() => {
         this.loadClients();
       });

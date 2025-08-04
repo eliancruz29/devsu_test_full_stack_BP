@@ -65,7 +65,7 @@ export class ClientFormComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Failed to load client';
+        this.error = 'Error al cargar el cliente.';
         this.loading = false;
       },
     });
@@ -83,7 +83,7 @@ export class ClientFormComponent implements OnInit {
     };
 
     const handleError = (err: any) => {
-      this.error = 'Failed to create client';
+      this.error = 'Error al crear el cliente.';
       if (isErrorResponse(err.error)) {
         this.error += `: ${err.error.message}`;
       }
