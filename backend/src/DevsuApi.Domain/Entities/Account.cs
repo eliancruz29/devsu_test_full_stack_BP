@@ -70,13 +70,13 @@ public sealed class Account : BaseEntity
         int amount)
     {
         int balance = GetBalance();
-        if (balance <= 0 && type == TransferTypes.Debit)
+        if (type == TransferTypes.Debit && ((balance - amount) <= 0))
         {
             throw new AccountUnAvailableBalanceException(Id);
         }
 
         int dailyDebit = GetDailyDebitTotal();
-        if (dailyDebit > DAILY_DEBIT_LIMIT && type == TransferTypes.Debit)
+        if (type == TransferTypes.Debit && ((dailyDebit + amount) > DAILY_DEBIT_LIMIT))
         {
             throw new TransferMaxDailyLimitReachedException(Id, DAILY_DEBIT_LIMIT);
         }

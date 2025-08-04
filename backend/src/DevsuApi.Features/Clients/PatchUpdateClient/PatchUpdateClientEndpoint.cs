@@ -16,34 +16,22 @@ public class PatchUpdateClientEndpoint : ICarterModule
     {
         app.MapPatch("api/clients/{id:guid}", async (Guid id, [FromBody] PatchUpdateClientRequest request, ISender sender, ILogger<PatchUpdateClientEndpoint> looger) =>
         {
-            try
+            if (id != request.Id)
             {
-                if (id != request.Id)
-                {
-                    return Results.BadRequest(new { Message = "Id in URL does not match the request body." });
-                }
-
-                var command = request.Adapt<PatchUpdateClientCommand>();
-                command.Id = id;
-
-                var result = await sender.Send(command);
-
-                if (result.IsFailure)
-                {
-                    return Results.BadRequest(result.Error);
-                }
-
-                return Results.NoContent();
+                return Results.BadRequest(new { Message = "Id in URL does not match the request body." });
             }
-            catch (ValidationException ex)
+
+            var command = request.Adapt<PatchUpdateClientCommand>();
+            command.Id = id;
+
+            var result = await sender.Send(command);
+
+            if (result.IsFailure)
             {
-                return Results.BadRequest(ex.Message);
+                return Results.BadRequest(result.Error);
             }
-            catch (Exception ex)
-            {
-                looger.LogError(ex, "An error occurred while patch updating a client.");
-                return Results.BadRequest("An unexpected error occurred.");
-            }
+
+            return Results.NoContent();
         })
         .WithName("PatchUpdateClient")
         .WithTags("Clients")

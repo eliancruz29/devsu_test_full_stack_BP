@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using DevsuApi.Domain.Exceptions.Transfers;
+using Microsoft.Extensions.Logging;
 
 namespace DevsuApi.Features.Transfers.DeleteTransfer;
 
@@ -11,7 +12,7 @@ public class DeleteTransferEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("api/transfers/{id:guid}", async (Guid id, ISender sender) =>
+        app.MapDelete("api/transfers/{id:guid}", async (Guid id, ISender sender, ILogger<DeleteTransferEndpoint> looger) =>
         {
             try
             {
@@ -21,8 +22,9 @@ public class DeleteTransferEndpoint : ICarterModule
 
                 return Results.NoContent();
             }
-            catch (TransferNotFoundException)
+            catch (TransferNotFoundException ex)
             {
+                looger.LogError(ex, ex.Message);
                 return Results.StatusCode(StatusCodes.Status304NotModified);
             }
         })

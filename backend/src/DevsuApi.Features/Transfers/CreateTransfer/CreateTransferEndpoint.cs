@@ -1,12 +1,14 @@
 using Carter;
 using DevsuApi.Domain.Exceptions.Accounts;
 using DevsuApi.Domain.Exceptions.Transfers;
+using DevsuApi.Domain.Shared;
 using FluentValidation;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 
 namespace DevsuApi.Features.Transfers.CreateTransfer;
 
@@ -14,7 +16,7 @@ public class CreateTransferEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/transfers", async (CreateTransferRequest request, ISender sender) =>
+        app.MapPost("api/transfers", async (CreateTransferRequest request, ISender sender, ILogger<CreateTransferEndpoint> looger) =>
         {
             try
             {
@@ -31,11 +33,21 @@ public class CreateTransferEndpoint : ICarterModule
             }
             catch (AccountUnAvailableBalanceException ex)
             {
-                return Results.BadRequest(ex.Message);
+                looger.LogError(ex, ex.Message);
+                return Results.BadRequest(
+                    new Error(
+                        "CreateTransfer.AccountUnAvailable",
+                        ex.Message)
+                );
             }
             catch (TransferMaxDailyLimitReachedException ex)
             {
-                return Results.BadRequest(ex.Message);
+                looger.LogError(ex, ex.Message);
+                return Results.BadRequest(
+                    new Error(
+                        "CreateTransfer.TransferMaxDailyLimitReached",
+                        ex.Message)
+                );
             }
         })
         .WithName("CreateTransfer")

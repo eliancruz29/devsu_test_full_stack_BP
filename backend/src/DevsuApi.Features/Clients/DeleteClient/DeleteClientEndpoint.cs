@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using DevsuApi.Domain.Exceptions.Clients;
+using Microsoft.Extensions.Logging;
 
 namespace DevsuApi.Features.Clients.DeleteClient;
 
@@ -11,7 +12,7 @@ public class DeleteClientEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("api/clients/{id:guid}", async (Guid id, ISender sender) =>
+        app.MapDelete("api/clients/{id:guid}", async (Guid id, ISender sender, ILogger<DeleteClientEndpoint> looger) =>
         {
             try
             {
@@ -21,8 +22,9 @@ public class DeleteClientEndpoint : ICarterModule
 
                 return Results.NoContent();
             }
-            catch (ClientNotFoundException)
+            catch (ClientNotFoundException ex)
             {
+                looger.LogError(ex, ex.Message);
                 return Results.StatusCode(StatusCodes.Status304NotModified);
             }
         })

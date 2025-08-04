@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using DevsuApi.Domain.Exceptions.Accounts;
+using Microsoft.Extensions.Logging;
 
 namespace DevsuApi.Features.Accounts.DeleteAccount;
 
@@ -11,7 +12,7 @@ public class DeleteAccountEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("api/accounts/{id:guid}", async (Guid id, ISender sender) =>
+        app.MapDelete("api/accounts/{id:guid}", async (Guid id, ISender sender, ILogger<DeleteAccountEndpoint> looger) =>
         {
             try
             {
@@ -21,8 +22,9 @@ public class DeleteAccountEndpoint : ICarterModule
 
                 return Results.NoContent();
             }
-            catch (AccountNotFoundException)
+            catch (AccountNotFoundException ex)
             {
+                looger.LogError(ex, ex.Message);
                 return Results.StatusCode(StatusCodes.Status304NotModified);
             }
         })
