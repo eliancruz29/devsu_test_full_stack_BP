@@ -8,6 +8,7 @@ public interface IClientRepository
     IQueryable<Client?> GetById(Guid id);
     Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<Client?> GetByIdWithAccountsAsync(Guid id, CancellationToken cancellationToken);
+    Task<Client?> GetByIdWithAccountsAndTransfersAsync(Guid id, DateTime startDate, DateTime endDate, CancellationToken cancellationToken);
     IQueryable<Client> GetAll();
     void Update(Client client);
     void Remove(Client client);

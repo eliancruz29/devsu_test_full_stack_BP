@@ -37,6 +37,15 @@ internal class ClientRepository : IClientRepository
             .SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 
+    public async Task<Client?> GetByIdWithAccountsAndTransfersAsync(Guid id, DateTime startDate, DateTime endDate, CancellationToken cancellationToken)
+    {
+        return await _context.Clients
+            .Include(c => c.Accounts)
+                .ThenInclude(a => a.Transfers.Where(t => t.Date >= startDate.Date && t.Date <= endDate.Date.AddDays(1).AddMilliseconds(-1)))
+            .AsNoTracking()
+            .SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
+    }
+
     public IQueryable<Client> GetAll()
     {
         return _context.Clients.AsNoTracking(); // Use AsNoTracking for read-only queries;

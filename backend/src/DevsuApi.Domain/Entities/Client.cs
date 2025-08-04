@@ -40,6 +40,8 @@ public sealed class Client : Person
 
     public IReadOnlyCollection<Account> Accounts => _accounts;
 
+    public bool HasTransfers => _accounts.Any(a => a.Transfers.Count != 0);
+
     public static Client Create(
         string name,
         Gender gender,

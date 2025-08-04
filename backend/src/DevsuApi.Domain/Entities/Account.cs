@@ -69,14 +69,15 @@ public sealed class Account : BaseEntity
         TransferTypes type,
         int amount)
     {
-        int balance = GetBalance();
-        if (type == TransferTypes.Debit && ((balance - amount) <= 0))
+        bool isDebit = type == TransferTypes.Debit;
+        int balance = GetBalance() + (amount * (isDebit ? -1 : 1));
+        if (balance <= 0)
         {
             throw new AccountUnAvailableBalanceException(Id);
         }
 
-        int dailyDebit = GetDailyDebitTotal();
-        if (type == TransferTypes.Debit && ((dailyDebit + amount) > DAILY_DEBIT_LIMIT))
+        int dailyDebit = GetDailyDebitTotal() + (amount * (isDebit ? 1 : -1));
+        if (dailyDebit > DAILY_DEBIT_LIMIT)
         {
             throw new TransferMaxDailyLimitReachedException(Id, DAILY_DEBIT_LIMIT);
         }
@@ -85,7 +86,7 @@ public sealed class Account : BaseEntity
             Id,
             type,
             amount,
-            GetBalance());
+            balance);
 
         _transfers.Add(newTransfer);
 
