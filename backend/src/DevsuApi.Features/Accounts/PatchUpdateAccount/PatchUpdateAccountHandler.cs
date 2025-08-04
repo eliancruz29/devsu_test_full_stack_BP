@@ -34,7 +34,7 @@ public sealed class PatchUpdateAccountHandler(
         }
 
         existantAccount.Update(
-            request.AccountNumber ?? existantAccount.AccountNumber,
+            string.IsNullOrWhiteSpace(request.AccountNumber) ? existantAccount.AccountNumber : request.AccountNumber,
             request.Type ?? existantAccount.Type,
             request.OpeningBalance ?? existantAccount.OpeningBalance,
             request.Status ?? existantAccount.Status
