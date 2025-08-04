@@ -4,58 +4,80 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AccountResponse } from '../../models/account.response';
+import { ClientService } from '../../../clients/services/client.service';
+import { ClientForAccountResponse } from '../../models/client-for-account.response';
 
 @Component({
   selector: 'app-account-list',
   imports: [CommonModule, FormsModule],
-  providers: [AccountService],
+  providers: [ClientService, AccountService],
   templateUrl: './account-list.component.html',
   styleUrl: './account-list.component.scss'
 })
 export class AccountListComponent {
+  clients: ClientForAccountResponse[] = [];
+  loadingClients = false;
+  errorClients = '';
+
   accounts: AccountResponse[] = [];
-  loading = false;
-  error = '';
+  loadingAccounts = false;
+  errorAccounts = '';
 
   constructor(
+    private clientService: ClientService,
     private accountService: AccountService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.loadClients();
     this.loadAccounts();
   }
 
-  loadAccounts(): void {
-    this.loading = true;
-    this.accountService.getAll().subscribe({
+  loadClients(): void {
+    this.loadingClients = true;
+    this.clientService.getAll().subscribe({
       next: (data) => {
-        this.accounts = data;
+        this.clients = data;
       },
       error: (err) => {
-        this.error = `Failed to load accounts by ${this.searchByName} term.`;
+        this.errorClients = `Failed to load clients.`;
       },
       complete: () => {
-        this.loading = false;
+        this.accounts = this.mapClientNameForAccounts(this.accounts, this.clients); // this could be done in a better way but for simplicity, we do it in this way
+        this.loadingClients = false;
       },
     });
   }
 
-  searchByName(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.loading = true;
-      const searchTerm = (event.target as HTMLInputElement).value.trim();
-      this.accountService.searchByName(searchTerm).subscribe({
-        next: (data) => {
-          this.accounts = data;
-          this.loading = false;
-        },
-        error: (err) => {
-          this.error = 'Failed to search accounts.';
-          this.loading = false;
-        },
-      });
-    }
+  loadAccounts(clientId?: string): void {
+    this.loadingAccounts = true;
+    this.accountService.getAll(clientId).subscribe({
+      next: (data) => {
+        this.accounts = this.mapClientNameForAccounts(data, this.clients); // this could be done in a better way but for simplicity, we do it in this way
+      },
+      error: (err) => {
+        this.errorAccounts = `Failed to load accounts.`;
+      },
+      complete: () => {
+        this.loadingAccounts = false;
+      },
+    });
+  }
+
+  mapClientNameForAccounts(accounts: AccountResponse[], clients: ClientForAccountResponse[]): AccountResponse[] {
+    return accounts.map(account => {
+      const client = clients.find(c => c.id === account.clientId);
+      return {
+        ...account,
+        clientName: client ? client.name : 'Unknown Client'
+      };
+    });
+  }
+
+  onSelectChange(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.loadAccounts(selectedValue);
   }
 
   editAccount(id: string): void {

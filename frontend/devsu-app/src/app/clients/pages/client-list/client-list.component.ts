@@ -33,7 +33,7 @@ export class ClientListComponent implements OnInit {
         this.clients = data;
       },
       error: (err) => {
-        this.error = `Failed to load clients by ${this.searchByName} term.`;
+        this.error = `Failed to load clients.`;
       },
       complete: () => {
         this.loading = false;

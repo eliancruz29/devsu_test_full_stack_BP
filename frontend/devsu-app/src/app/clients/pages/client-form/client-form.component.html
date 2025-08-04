@@ -1,73 +1,74 @@
-<h2>{{ clientId ? 'Edit Client' : 'New Client' }}</h2>
+<h2>{{ clientId ? 'Editar cliente' : 'Nuevo cliente' }}</h2>
 
 <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
 
     <div *ngIf="error" style="color:red">{{ error }}</div>
 
     <div class="form-group">
-        <label for="name">Name {{clientId ? '' : '*'}}</label>
+        <label for="name">Nombre {{clientId ? '' : '*'}}</label>
         <input id="name" type="text" formControlName="name" />
         <div class="error-message" *ngIf="clientForm.get('name')?.invalid && clientForm.get('name')?.touched">
-            Name is required.
+            El nombre es requerido.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="gender">Gender {{clientId ? '' : '*'}}</label>
+        <label for="gender">Genero {{clientId ? '' : '*'}}</label>
         <select id="gender" formControlName="gender">
             <option [value]="null">--Select Gender--</option>
             <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
         </select>
         <div class="error-message" *ngIf="clientForm.get('gender')?.invalid && clientForm.get('gender')?.touched">
-            Gender is required.
+            El genero es requerido.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="dateOfBirth">Date of Birth {{clientId ? '' : '*'}}</label>
+        <label for="dateOfBirth">Fecha de nacimiento {{clientId ? '' : '*'}}</label>
         <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
         <div class="error-message"
             *ngIf="clientForm.get('dateOfBirth')?.invalid && clientForm.get('dateOfBirth')?.touched">
-            Date of Birth is required.
+            La fecha de nacimiento es requerido.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="identification">Identification {{clientId ? '' : '*'}}</label>
+        <label for="identification">Identififcación {{clientId ? '' : '*'}}</label>
         <input id="identification" type="text" formControlName="identification" />
         <div class="error-message"
             *ngIf="clientForm.get('identification')?.invalid && clientForm.get('identification')?.touched">
-            Identification is required.
+            La identififcación es requerida.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="address">Address {{clientId ? '' : '*'}}</label>
+        <label for="address">Dirección {{clientId ? '' : '*'}}</label>
         <input id="address" type="text" formControlName="address" />
         <div class="error-message" *ngIf="clientForm.get('address')?.invalid && clientForm.get('address')?.touched">
-            Address is required.
+            La dirección es requerida.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="phoneNumber">Phone Number {{clientId ? '' : '*'}}</label>
+        <label for="phoneNumber">Numero de teléfono {{clientId ? '' : '*'}}</label>
         <input id="phoneNumber" type="text" formControlName="phoneNumber" />
         <div class="error-message"
             *ngIf="clientForm.get('phoneNumber')?.invalid && clientForm.get('phoneNumber')?.touched">
-            Phone Number is required.
+            El numero de teléfono es requerido.
         </div>
     </div>
 
     <div class="form-group">
-        <label for="password">Password {{clientId ? '' : '*'}}</label>
+        <label for="password">Contraseña {{clientId ? '' : '*'}}</label>
         <input id="password" type="password" formControlName="password" />
         <div class="error-message" *ngIf="clientForm.get('password')?.invalid && clientForm.get('password')?.touched">
-            Password is required.
+            La contraseña es requerida.
         </div>
     </div>
 
     <div class="button-container">
-        <button type="button" (click)="onCancel()" [disabled]="loading">Cancel</button>
-        <button type="submit" [disabled]="loading || clientForm.invalid">{{ loading ? " ... " : clientId ? 'Update' : 'Create' }}</button>
+        <button type="button" (click)="onCancel()" [disabled]="loading">Cancelar</button>
+        <button type="submit" [disabled]="loading || clientForm.invalid">{{ loading ? " ... " : clientId ? 'Actualizar' :
+            'Crear' }}</button>
     </div>
 </form>

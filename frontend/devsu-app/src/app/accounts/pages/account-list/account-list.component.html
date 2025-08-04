@@ -1,37 +1,41 @@
-<h2>Accounts</h2>
+<h2>Cuentas</h2>
 
 <div class="search-new-container">
-  <input type="text" (keyup)="searchByName($event)" placeholder="Search accounts by name..." />
-  <button (click)="createNew()">Add New Account</button>
+    <select (change)="onSelectChange($event)">
+        <option [value]="''">--Filtrar por cliente--</option>
+        <option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</option>
+    </select>
+
+    <button (click)="createNew()">Agregar nueva cuenta</button>
 </div>
 
 <div class="account-list-container">
-  <div *ngIf="loading">Loading...</div>
-  <div *ngIf="error" style="color:red">{{ error }}</div>
+    <div *ngIf="loadingAccounts">Cargando...</div>
+    <div *ngIf="errorAccounts" style="color:red">{{ errorAccounts }}</div>
 
-  <table *ngIf="accounts.length > 0">
-    <thead>
-      <tr>
-        <th>Cliente</th>
-        <th>Numero de cuenta</th>
-        <th>Tipo</th>
-        <th>Saldo Inicial</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let account of accounts">
-        <td>{{ account.clientId }}</td>
-        <td>{{ account.accountNumber }}</td>
-        <td>{{ account.typeName }}</td>
-        <td>{{ account.openingBalance }}</td>
-        <td>
-          <button (click)="editAccount(account.id)">Edit</button>
-          <button (click)="deleteAccount(account.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table *ngIf="accounts.length > 0">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Numero de cuenta</th>
+                <th>Tipo</th>
+                <th>Saldo Inicial</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let account of accounts">
+                <td>{{ account.clientName }}</td>
+                <td>{{ account.accountNumber }}</td>
+                <td>{{ account.typeName }}</td>
+                <td>{{ account.openingBalance | currency }}</td>
+                <td>
+                    <button (click)="editAccount(account.id)">Editar</button>
+                    <button (click)="deleteAccount(account.id)">Borrar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-  <div *ngIf="accounts.length === 0 && !loading">No accounts found.</div>
+    <div *ngIf="accounts.length === 0 && !loadingAccounts">No se encontraron cuentas.</div>
 </div>

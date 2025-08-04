@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { AccountResponse } from "../models/account.response";
+import { isNullOrUndefinedOrEmpty } from "../../core/helpers/string.helpers";
 
 @Injectable()
 export class AccountService {
@@ -10,8 +11,8 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<AccountResponse[]> {
-    return this.http.get<AccountResponse[]>(this.api);
+  getAll(clientId?: string): Observable<AccountResponse[]> {
+    return this.http.get<AccountResponse[]>(this.api + (isNullOrUndefinedOrEmpty(clientId) ? '' : `?clientId=${clientId}`));
   }
 
   searchByName(searchTerm: string) {
