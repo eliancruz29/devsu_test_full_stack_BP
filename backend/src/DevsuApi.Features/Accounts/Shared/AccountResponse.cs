@@ -12,4 +12,5 @@ public class AccountResponse
     public string TypeName => Type.GetDatabaseName();
     public int OpeningBalance { get; set; }
     public Status Status { get; set; }
+    public string StatusName => Status.GetDatabaseName();
 }

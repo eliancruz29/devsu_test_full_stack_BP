@@ -40,8 +40,11 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
    Navigate to DevsuApi.Api project and from there execute the commands below
 
    ```sh
-   dotnet ef migrations add InitialCreate --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj -o ./../DevsuApi.Infrastructure/Migrations
-   dotnet ef database update --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj -o ./../DevsuApi.Infrastructure/Migrations --verbose
+   dotnet ef migrations add InitialCreate --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj -o ./../DevsuApi.Infrastructure/Migrations --verbose
+
+   dotnet ef migrations remove --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --verbose
+
+   dotnet ef database update --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --verbose
    ```
 
 **Run the Docker container:**

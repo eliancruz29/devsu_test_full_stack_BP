@@ -11,7 +11,8 @@ public sealed class Transfer : BaseEntity
         DateTime date,
         TransferTypes type,
         int amount,
-        int balance
+        int balance,
+        Status status
     ) : base(id)
     {
         AccountId = accountId;
@@ -19,6 +20,7 @@ public sealed class Transfer : BaseEntity
         Type = type;
         Amount = amount;
         Balance = balance;
+        Status = status;
     }
 
     public Guid AccountId { get; private set; }
@@ -30,6 +32,8 @@ public sealed class Transfer : BaseEntity
     public int Amount { get; private set; }
 
     public int Balance { get; private set; }
+
+    public Status Status { get; private set; }
 
     public static Transfer Create(
         Guid accountId,
@@ -43,7 +47,8 @@ public sealed class Transfer : BaseEntity
             DateTime.Now,
             type,
             amount,
-            balance);
+            balance,
+            Status.Active);
     }
 
     public void Update(

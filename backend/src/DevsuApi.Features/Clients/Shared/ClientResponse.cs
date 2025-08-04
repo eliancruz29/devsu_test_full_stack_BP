@@ -16,4 +16,5 @@ public class ClientResponse
     public Guid ClientId { get; set; }
     public string Password { get; set; } = string.Empty;
     public Status Status { get; set; }
+    public string StatusName => Status.GetDatabaseName();
 }

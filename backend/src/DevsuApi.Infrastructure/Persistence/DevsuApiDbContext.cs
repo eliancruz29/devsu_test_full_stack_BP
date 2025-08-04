@@ -37,6 +37,7 @@ public class DevsuApiDbContext : DbContext, IDevsuApiDbContext, IUnitOfWork
             .Entity<Account>()
             .Property(p => p.Type)
             .HasConversion(new EnumMemberConverter<AccountTypes>());
+
         modelBuilder
             .Entity<Account>()
             .Property(p => p.Status)
@@ -48,6 +49,11 @@ public class DevsuApiDbContext : DbContext, IDevsuApiDbContext, IUnitOfWork
             .Entity<Transfer>()
             .Property(p => p.Type)
             .HasConversion(new EnumMemberConverter<TransferTypes>());
+            
+        modelBuilder
+            .Entity<Transfer>()
+            .Property(p => p.Status)
+            .HasConversion(new EnumMemberConverter<Status>());
         #endregion
     }
 

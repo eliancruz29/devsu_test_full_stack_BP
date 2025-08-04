@@ -13,6 +13,7 @@ public sealed class GetListOfTransfersHandler(ITransferRepository transferReposi
     {
         var transfers = await transferRepository.GetAll()
             .Where(t => !request.AccountId.HasValue || t.AccountId == request.AccountId)
+            .OrderByDescending(t => t.Date)
             .ProjectToType<TransferResponse>()
             .ToListAsync(cancellationToken);
 
