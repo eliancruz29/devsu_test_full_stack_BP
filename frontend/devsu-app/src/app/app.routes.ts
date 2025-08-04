@@ -15,6 +15,7 @@ export const routes: Routes = [
 
   { path: 'cuentas', title: 'Página Cuentas', component: AccountListComponent },
   { path: 'cuentas/crear', title: 'Página Crear Cuenta', component: AccountFormComponent },
+  { path: 'cuentas/editar/:id', title: 'Página Editar Cuenta', component: AccountFormComponent },
 
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
