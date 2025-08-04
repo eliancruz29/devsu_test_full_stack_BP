@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { EnumObject } from '../../../core/enums/enum-object';
 import { areAllPropertiesFulfilled, isErrorResponse } from '../../../core/helpers/interface.helper';
 import { getGenderAsEnumObjectOptions } from '../../../core/helpers/enum.helper';
+import { isNullOrUndefinedOrEmpty } from '../../../core/helpers/string.helpers';
 
 @Component({
   selector: 'app-client-form',
@@ -74,26 +75,33 @@ export class ClientFormComponent implements OnInit {
     if (this.clientForm.invalid) return;
 
     const formValue = this.clientForm.value;
-    formValue.gender = +formValue.gender; // Convert to number
     this.loading = true;
 
     const handleSuccess = () => {
       this.router.navigate(['/clientes']);
+      this.loading = false;
     };
 
     const handleError = (err: any) => {
       this.error = 'Failed to create client';
-      console.log(isErrorResponse(err.error), err.error);
       if (isErrorResponse(err.error)) {
         this.error += `: ${err.error.message}`;
       }
+      this.loading = false;
     };
 
     if (this.clientId) {
       formValue.id = this.clientId; // Add id for update
       const handlers = { next: handleSuccess, error: handleError }
+      const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
 
-      if (areAllPropertiesFulfilled(formValue)) {
+      if (isNullOrUndefinedOrEmpty(formValue.gender)) {
+        delete formValue.gender; // Remove gender if not selected
+      } else {
+        formValue.gender = +formValue.gender; // Convert to number
+      }
+
+      if (propertiesFulfilled) {
         this.clientService.update(this.clientId, formValue).subscribe(handlers);
       } else {
         this.clientService.partialUpdate(this.clientId, formValue).subscribe(handlers);
@@ -102,9 +110,6 @@ export class ClientFormComponent implements OnInit {
       this.clientService.create(formValue).subscribe({
         next: handleSuccess,
         error: handleError,
-        complete: () => {
-          this.loading = false;
-        }
       });
     }
   }

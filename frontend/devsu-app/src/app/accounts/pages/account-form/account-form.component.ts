@@ -8,6 +8,7 @@ import { getAccountTypeAsEnumObjectOptions, getGenderAsEnumObjectOptions } from 
 import { EnumObject } from '../../../core/enums/enum-object';
 import { ClientForAccountResponse } from '../../models/client-for-account.response';
 import { ClientService } from '../../../clients/services/client.service';
+import { isNullOrUndefinedOrEmpty } from '../../../core/helpers/string.helpers';
 
 @Component({
   selector: 'app-account-form',
@@ -56,13 +57,12 @@ export class AccountFormComponent implements OnInit {
     this.clientService.getAll().subscribe({
       next: (data) => {
         this.clients = data;
+        this.loading = false;
       },
       error: (err) => {
         this.error = `Failed to load clients.`;
-      },
-      complete: () => {
         this.loading = false;
-      },
+      }
     });
   }
 
@@ -89,26 +89,33 @@ export class AccountFormComponent implements OnInit {
     if (this.accountForm.invalid) return;
 
     const formValue = this.accountForm.value;
-    formValue.type = +formValue.type; // Convert to number
     this.loading = true;
 
     const handleSuccess = () => {
       this.router.navigate(['/cuentas']);
+      this.loading = false;
     };
 
     const handleError = (err: any) => {
       this.error = 'Failed to create account';
-      console.log(isErrorResponse(err.error), err.error);
       if (isErrorResponse(err.error)) {
         this.error += `: ${err.error.message}`;
       }
+      this.loading = false;
     };
 
     if (this.accountId) {
       formValue.id = this.accountId; // Add id for update
       const handlers = { next: handleSuccess, error: handleError }
+      const propertiesFulfilled = areAllPropertiesFulfilled(formValue);
 
-      if (areAllPropertiesFulfilled(formValue)) {
+      if (isNullOrUndefinedOrEmpty(formValue.type)) {
+        delete formValue.type; // Remove type if not selected
+      } else {
+        formValue.type = +formValue.type; // Convert to number
+      }
+
+      if (propertiesFulfilled) {
         this.accountService.update(this.accountId, formValue).subscribe(handlers);
       } else {
         this.accountService.partialUpdate(this.accountId, formValue).subscribe(handlers);
@@ -117,9 +124,6 @@ export class AccountFormComponent implements OnInit {
       this.accountService.create(formValue).subscribe({
         next: handleSuccess,
         error: handleError,
-        complete: () => {
-          this.loading = false;
-        }
       });
     }
   }

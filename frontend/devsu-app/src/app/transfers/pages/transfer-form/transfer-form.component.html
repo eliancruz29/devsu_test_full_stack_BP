@@ -1,0 +1,44 @@
+<h2>{{ transferId ? 'Editar movimiento' : 'Nuevo movimiento' }}</h2>
+
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="error" style="color:red">{{ error }}</div>
+
+    <div class="form-group" *ngIf="!transferId">
+        <label for="accountId">Cuenta *</label>
+        <select id="accountId" formControlName="accountId">
+            <option [value]="''">--Seleccionar cuenta--</option>
+            <option *ngFor="let c of accounts" [value]="c.id">{{ c.accountNumber }}</option>
+        </select>
+        <div class="error-message" *ngIf="transferForm.get('accountId')?.invalid && transferForm.get('accountId')?.touched">
+            La cuenta es requerida.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="type">Tipo de movimiento {{transferId ? '' : '*'}}</label>
+        <select id="type" formControlName="type">
+            <option [value]="''">--Seleccionar tipo de movimiento--</option>
+            <option *ngFor="let tt of transferTypes" [value]="tt.value">{{ tt.label }}</option>
+        </select>
+        <div class="error-message" *ngIf="transferForm.get('type')?.invalid && transferForm.get('type')?.touched">
+            El tipo de movimiento es requerido.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Monto {{transferId ? '' : '*'}}</label>
+        <input id="amount" type="number" formControlName="amount" />
+        <div class="error-message"
+            *ngIf="transferForm.get('amount')?.invalid && transferForm.get('amount')?.touched">
+            El monto es requerido.
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="button" (click)="onCancel()" [disabled]="loading">Cancelar</button>
+        <button type="submit" [disabled]="loading || transferForm.invalid">{{ loading ? " ... " : transferId ?
+            'Actualizar' :
+            'Crear' }}</button>
+    </div>
+</form>

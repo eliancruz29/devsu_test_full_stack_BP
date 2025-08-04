@@ -35,12 +35,10 @@ export class TransferListComponent {
     this.accountService.getAll().subscribe({
       next: (data) => {
         this.accounts = data;
+        this.transfers = this.mapAccountNameForTransfers(this.transfers, this.accounts); // this could be done in a better way but for simplicity, we do it in this way
       },
       error: (err) => {
         this.error = `Failed to load accounts.`;
-      },
-      complete: () => {
-        this.transfers = this.mapAccountNameForTransfers(this.transfers, this.accounts); // this could be done in a better way but for simplicity, we do it in this way
       },
     });
   }
@@ -50,11 +48,10 @@ export class TransferListComponent {
     this.transferService.getAll(accountId).subscribe({
       next: (data) => {
         this.transfers = this.mapAccountNameForTransfers(data, this.accounts); // this could be done in a better way but for simplicity, we do it in this way
+        this.loading = false;
       },
       error: (err) => {
         this.error = `Failed to load transfers.`;
-      },
-      complete: () => {
         this.loading = false;
       },
     });

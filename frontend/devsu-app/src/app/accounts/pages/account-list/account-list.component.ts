@@ -35,12 +35,10 @@ export class AccountListComponent {
     this.clientService.getAll().subscribe({
       next: (data) => {
         this.clients = data;
+        this.accounts = this.mapClientNameForAccounts(this.accounts, this.clients); // this could be done in a better way but for simplicity, we do it in this way
       },
       error: (err) => {
         this.error = `Failed to load clients.`;
-      },
-      complete: () => {
-        this.accounts = this.mapClientNameForAccounts(this.accounts, this.clients); // this could be done in a better way but for simplicity, we do it in this way
       },
     });
   }
@@ -50,11 +48,10 @@ export class AccountListComponent {
     this.accountService.getAll(clientId).subscribe({
       next: (data) => {
         this.accounts = this.mapClientNameForAccounts(data, this.clients); // this could be done in a better way but for simplicity, we do it in this way
+        this.loading = false;
       },
       error: (err) => {
         this.error = `Failed to load accounts.`;
-      },
-      complete: () => {
         this.loading = false;
       },
     });

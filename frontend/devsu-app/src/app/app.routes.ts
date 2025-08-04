@@ -6,6 +6,7 @@ import { ClientFormComponent } from './clients/pages/client-form/client-form.com
 import { AccountListComponent } from './accounts/pages/account-list/account-list.component';
 import { AccountFormComponent } from './accounts/pages/account-form/account-form.component';
 import { TransferListComponent } from './transfers/pages/transfer-list/transfer-list.component';
+import { TransferFormComponent } from './transfers/pages/transfer-form/transfer-form.component';
 
 export const routes: Routes = [
   { path: '', title: 'Página Inicio', component: HomeComponent },
@@ -19,8 +20,8 @@ export const routes: Routes = [
   { path: 'cuentas/editar/:id', title: 'Página Editar Cuenta', component: AccountFormComponent },
 
   { path: 'movimientos', title: 'Página Movimientos', component: TransferListComponent },
-  // { path: 'movimientos/crear', title: 'Página Crear Movimiento', component: TransferFormComponent },
-  // { path: 'movimientos/editar/:id', title: 'Página Editar Movimiento', component: TransferFormComponent },
+  { path: 'movimientos/crear', title: 'Página Crear Movimiento', component: TransferFormComponent },
+  { path: 'movimientos/editar/:id', title: 'Página Editar Movimiento', component: TransferFormComponent },
 
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];

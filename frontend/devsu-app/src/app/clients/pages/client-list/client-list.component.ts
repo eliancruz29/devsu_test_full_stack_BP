@@ -31,11 +31,10 @@ export class ClientListComponent implements OnInit {
     this.clientService.getAll().subscribe({
       next: (data) => {
         this.clients = data;
+        this.loading = false;
       },
       error: (err) => {
         this.error = `Failed to load clients.`;
-      },
-      complete: () => {
         this.loading = false;
       },
     });

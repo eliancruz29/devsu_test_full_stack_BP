@@ -5,7 +5,7 @@
     <div *ngIf="error" style="color:red">{{ error }}</div>
 
     <div class="form-group" *ngIf="!accountId">
-        <label for="clientId">Cliente {{accountId ? '' : '*'}}</label>
+        <label for="clientId">Cliente *</label>
         <select id="clientId" formControlName="clientId">
             <option [value]="''">--Seleccionar cliente--</option>
             <option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</option>
@@ -27,7 +27,7 @@
     <div class="form-group">
         <label for="type">Tipo de cuenta {{accountId ? '' : '*'}}</label>
         <select id="type" formControlName="type">
-            <option [value]="null">--Seleccionar tipo de cuenta--</option>
+            <option [value]="''">--Seleccionar tipo de cuenta--</option>
             <option *ngFor="let at of accountTypes" [value]="at.value">{{ at.label }}</option>
         </select>
         <div class="error-message" *ngIf="accountForm.get('type')?.invalid && accountForm.get('type')?.touched">

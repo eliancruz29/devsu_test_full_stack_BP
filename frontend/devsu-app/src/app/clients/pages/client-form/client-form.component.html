@@ -15,7 +15,7 @@
     <div class="form-group">
         <label for="gender">Genero {{clientId ? '' : '*'}}</label>
         <select id="gender" formControlName="gender">
-            <option [value]="null">--Seleccionar genero--</option>
+            <option [value]="''">--Seleccionar genero--</option>
             <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
         </select>
         <div class="error-message" *ngIf="clientForm.get('gender')?.invalid && clientForm.get('gender')?.touched">
