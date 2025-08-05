@@ -1,5 +1,5 @@
-using System.Net;
 using System.Text.Json;
+using DevsuApi.Domain.Shared;
 
 namespace DevsuApi.Middlewares;
 
@@ -22,7 +22,7 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unhandled exception occurred.");
+            _logger.LogError(ex, "An unhandled exception occurred: {Message}", ex.Message);
             await HandleExceptionAsync(context, ex);
         }
     }
@@ -30,18 +30,11 @@ public class ExceptionHandlingMiddleware
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-        var problem = new
-        {
-            title = "An unexpected error occurred",
-            status = context.Response.StatusCode,
-            detail = exception.Message,
-            traceId = context.TraceIdentifier
-        };
+        var error = new Error("Server error", "An unexpected error occurred");
 
-        var json = JsonSerializer.Serialize(problem);
+        var json = JsonSerializer.Serialize(error);
         return context.Response.WriteAsync(json);
     }
 }
-
