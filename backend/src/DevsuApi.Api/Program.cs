@@ -55,6 +55,13 @@ app.MapCarter();
 
 app.UseHttpsRedirection();
 
+// Redirect root ("/") to Swagger UI
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
+
 app.Run();
 
 public partial class Program { }
