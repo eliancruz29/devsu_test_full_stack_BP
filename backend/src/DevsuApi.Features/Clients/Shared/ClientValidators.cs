@@ -13,14 +13,14 @@ public static class ClientValidators
         {
             RuleFor(c => c.Name).NotEmpty();
             RuleFor(c => c.DateOfBirth).NotEmpty().NotEqual(default(DateTime))
-                .WithMessage("Date of Birth must be a valid date.");
+                .WithMessage("La fecha de nacimiento debe de ser una fecha valida.");
             RuleFor(c => c.Identification).NotEmpty().Matches(@"^\d{3}-\d{7}-\d{1}$|^\d{11}$")
-                .WithMessage("Identification must be a valid Dominican Republic ID format (###-#######-# or 11 digits).");
+                .WithMessage("La identificación debe de ser en un formato valido para Republica Dominicana (###-#######-# u 11 digitos).");
             RuleFor(c => c.Address).NotEmpty();
             RuleFor(c => c.PhoneNumber).NotEmpty().Matches(@"^\+?[1-9]\d{1,14}$")
-                .WithMessage("Phone number must be a valid international format.");
+                .WithMessage("El número de teléfono debe de ser en un formato internacional valido.");
             RuleFor(c => c.Password).NotEmpty().MinimumLength(6)
-                .WithMessage("Password must be at least 6 characters long.");
+                .WithMessage("La clave debe de ser al menos de 6 caracteres de longitud.");
         }
     }
 
@@ -49,15 +49,15 @@ public static class ClientValidators
             RuleFor(c => c.Identification)
                 .Matches(@"^\d{3}-\d{7}-\d{1}$|^\d{11}$")
                 .When(c => !string.IsNullOrWhiteSpace(c.Identification))
-                .WithMessage("Identification must be a valid Dominican Republic ID format (###-#######-# or 11 digits).");
+                .WithMessage("La identificación debe de ser en un formato valido para Republica Dominicana (###-#######-# u 11 digitos).");
             RuleFor(c => c.PhoneNumber)
                 .Matches(@"^\+?[1-9]\d{1,14}$")
                 .When(c => !string.IsNullOrWhiteSpace(c.PhoneNumber))
-                .WithMessage("Phone number must be a valid international format.");
+                .WithMessage("El número de teléfono debe de ser en un formato internacional valido.");
             RuleFor(c => c.Password)
                 .MinimumLength(6)
                 .When(c => !string.IsNullOrWhiteSpace(c.Password))
-                .WithMessage("Password must be at least 6 characters long.");
+                .WithMessage("La clave debe de ser al menos de 6 caracteres de longitud.");
         }
     }
 }

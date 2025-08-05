@@ -33,6 +33,7 @@ internal class AccountRepository : IAccountRepository
     {
         return await _context.Accounts
             .Include(a => a.Transfers)
+            .AsSplitQuery()
             .AsNoTracking()
             .SingleOrDefaultAsync(a => a.Id == id, cancellationToken);
     }

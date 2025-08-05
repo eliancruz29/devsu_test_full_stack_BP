@@ -10,7 +10,7 @@ namespace DevsuApi.Features.Reports.GetTransfersReport;
 public class GetTransfersReportEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
-    {        
+    {
         app.MapGet("api/reports/transfers", async ([AsParameters] GetTransfersReportRequest request, ISender sender) =>
         {
             var query = request.Adapt<GetTransfersReportQuery>();
@@ -19,7 +19,14 @@ public class GetTransfersReportEndpoint : ICarterModule
 
             if (result.IsFailure)
             {
-                return Results.NoContent();
+                if (GetTransfersReportErrorCodes.Validation.Equals(result.Error.Code))
+                {
+                    return Results.BadRequest(result.Error.Message);
+                }
+                else
+                {
+                    return Results.NoContent();
+                }
             }
 
             return Results.Ok(result.Value);
@@ -27,6 +34,7 @@ public class GetTransfersReportEndpoint : ICarterModule
         .WithName("GetTransfersReport")
         .WithTags("Reports")
         .Produces<IEnumerable<TransfersReportResponse>>(StatusCodes.Status200OK)
-        .Produces(StatusCodes.Status204NoContent);
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status400BadRequest);
     }
 }

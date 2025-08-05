@@ -29,7 +29,7 @@ public class TransfersReportResponse
             Type = a.Type,
             OpeningBalance = a.OpeningBalance,
             Amount = t.Amount * (isDebit ? -1 : 1),
-            Balance = t.Balance + (t.Amount * (isDebit ? -1 : 1)),
+            Balance = t.Balance,
             Status = t.Status
         };
     }

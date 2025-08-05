@@ -33,6 +33,7 @@ internal class ClientRepository : IClientRepository
     {
         return await _context.Clients
             .Include(c => c.Accounts)
+            .AsSplitQuery()
             .AsNoTracking()
             .SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
@@ -42,6 +43,7 @@ internal class ClientRepository : IClientRepository
         return await _context.Clients
             .Include(c => c.Accounts)
                 .ThenInclude(a => a.Transfers.Where(t => t.Date >= startDate.Date && t.Date <= endDate.Date.AddDays(1).AddMilliseconds(-1)))
+            .AsSplitQuery()
             .AsNoTracking()
             .SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
     }

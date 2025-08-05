@@ -12,7 +12,7 @@ public static class AccountValidators
         public BaseAccountPropertiesValidator()
         {
             RuleFor(c => c.OpeningBalance).GreaterThanOrEqualTo(0)
-                .WithMessage("Opening balance must be greater than or equal to 0.");
+                .WithMessage("El saldo inicial debe de ser mayor o igual a 0.");
             RuleFor(c => c.AccountNumber).NotEmpty();
         }
     }
@@ -25,7 +25,7 @@ public static class AccountValidators
             Include(new BaseAccountPropertiesValidator());
 
             RuleFor(c => c.ClientId).NotEqual(default(Guid))
-                .WithMessage("The client ID must be a valid and existent Client.");
+                .WithMessage("El ID del cliente debe de ser valido y el cliente debe de existir.");
         }
     }
 
@@ -45,7 +45,7 @@ public static class AccountValidators
             RuleFor(c => c.OpeningBalance)
                 .GreaterThanOrEqualTo(0)
                 .When(c => null != c.OpeningBalance)
-                .WithMessage("Opening balance must be greater than or equal to 0.");
+                .WithMessage("El saldo inicial debe de ser mayor o igual a 0.");
         }
     }
 }

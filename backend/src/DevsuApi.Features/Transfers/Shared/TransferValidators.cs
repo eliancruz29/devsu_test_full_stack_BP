@@ -12,7 +12,7 @@ public static class TransferValidators
         public BaseTransferPropertiesValidator()
         {
             RuleFor(c => c.Amount).GreaterThanOrEqualTo(1)
-                .WithMessage("The amount of the transfer must be greater than or equal to 1.");
+                .WithMessage("El monto del movimiento debe de ser mayor o igual a 1.");
         }
     }
 
@@ -25,7 +25,7 @@ public static class TransferValidators
 
             RuleFor(c => c.AccountId)
                 .NotEqual(default(Guid))
-                .WithMessage("The account ID must be a valid and existent Account.");
+                .WithMessage("El ID de la cuenta debe de ser valido y la cuenta debe de existir.");
         }
     }
 
@@ -45,7 +45,7 @@ public static class TransferValidators
             RuleFor(c => c.Amount)
                 .GreaterThanOrEqualTo(1)
                 .When(c => null != c.Amount)
-                .WithMessage("The amount of the transfer must be greater than or equal to 1.");
+                .WithMessage("El monto del movimiento debe de ser mayor o igual a 1.");
         }
     }
 }
