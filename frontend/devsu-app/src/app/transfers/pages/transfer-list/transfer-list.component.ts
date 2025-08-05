@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TransferResponse } from '../../models/transfer.response';
 import { AccountService } from '../../../accounts/services/account.service';
 import { AccountForTransferResponse } from '../../models/account-for-transfer.response';
+import { DevsuAppConstants } from '../../../shared/constants';
 
 @Component({
   selector: 'app-transfer-list',
@@ -19,6 +20,7 @@ export class TransferListComponent {
   transfers: TransferResponse[] = [];
   loading = false;
   error = '';
+  constants = DevsuAppConstants;
 
   constructor(
     private accountService: AccountService,

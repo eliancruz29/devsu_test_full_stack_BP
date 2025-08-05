@@ -29,7 +29,7 @@
                 <td>{{ account.clientName }}</td>
                 <td>{{ account.accountNumber }}</td>
                 <td>{{ account.typeName }}</td>
-                <td>{{ account.openingBalance | currency }}</td>
+                <td>{{ account.openingBalance | currency: constants.DEFAULT_CURRENCY : 'symbol' : constants.CURRENCY_DECIMALS }}</td>
                 <td>{{ account.statusName }}</td>
                 <td>
                     <button (click)="editAccount(account.id)">Editar</button>

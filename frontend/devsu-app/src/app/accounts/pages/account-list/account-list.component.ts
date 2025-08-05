@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AccountResponse } from '../../models/account.response';
 import { ClientService } from '../../../clients/services/client.service';
-import { ClientForAccountResponse } from '../../models/client-for-account.response';
+import { SimpleClientResponse } from '../../../clients/models/simple-client.response';
+import { DevsuAppConstants } from '../../../shared/constants';
 
 @Component({
   selector: 'app-account-list',
@@ -15,10 +16,11 @@ import { ClientForAccountResponse } from '../../models/client-for-account.respon
   styleUrl: './account-list.component.scss'
 })
 export class AccountListComponent {
-  clients: ClientForAccountResponse[] = [];
+  clients: SimpleClientResponse[] = [];
   accounts: AccountResponse[] = [];
   loading = false;
   error = '';
+  constants = DevsuAppConstants;
 
   constructor(
     private clientService: ClientService,
@@ -57,7 +59,7 @@ export class AccountListComponent {
     });
   }
 
-  mapClientNameForAccounts(accounts: AccountResponse[], clients: ClientForAccountResponse[]): AccountResponse[] {
+  mapClientNameForAccounts(accounts: AccountResponse[], clients: SimpleClientResponse[]): AccountResponse[] {
     return accounts.map(account => {
       const client = clients.find(c => c.id === account.clientId);
       return {

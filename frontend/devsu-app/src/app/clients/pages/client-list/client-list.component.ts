@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { ClientResponse } from '../../models/client.response';
+import { DevsuAppConstants } from '../../../shared/constants';
 
 @Component({
   selector: 'app-client-list',
@@ -16,6 +17,7 @@ export class ClientListComponent implements OnInit {
   clients: ClientResponse[] = [];
   loading = false;
   error = '';
+  constants = DevsuAppConstants;
 
   constructor(
     private clientService: ClientService,

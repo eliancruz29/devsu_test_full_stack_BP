@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { areAllPropertiesFulfilled, isErrorResponse } from '../../../core/helpers/interface.helper';
 import { getAccountTypeAsEnumObjectOptions, getGenderAsEnumObjectOptions } from '../../../core/helpers/enum.helper';
 import { EnumObject } from '../../../core/enums/enum-object';
-import { ClientForAccountResponse } from '../../models/client-for-account.response';
+import { SimpleClientResponse } from '../../../clients/models/simple-client.response';
 import { ClientService } from '../../../clients/services/client.service';
 import { isNullOrUndefinedOrEmpty } from '../../../core/helpers/string.helpers';
 
@@ -23,7 +23,7 @@ export class AccountFormComponent implements OnInit {
   loading = false;
   error = '';
   accountTypes!: EnumObject<number>[];
-  clients: ClientForAccountResponse[] = [];
+  clients: SimpleClientResponse[] = [];
 
   constructor(
     private fb: FormBuilder,

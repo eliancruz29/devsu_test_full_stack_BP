@@ -1,0 +1,39 @@
+<h2>Generar reporte de movimientos</h2>
+
+<form [formGroup]="transfersReportForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="error" style="color:red">{{ error }}</div>
+
+    <div class="form-group">
+        <label for="clientId">Cliente *</label>
+        <select id="clientId" formControlName="clientId">
+            <option [value]="''">--Seleccionar cliente--</option>
+            <option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</option>
+        </select>
+        <div class="error-message" *ngIf="transfersReportForm.get('clientId')?.invalid && transfersReportForm.get('clientId')?.touched">
+            El cliente es requerido.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="startDate">Fecha de inicio *</label>
+        <input id="startDate" type="date" formControlName="startDate" />
+        <div class="error-message"
+            *ngIf="transfersReportForm.get('startDate')?.invalid && transfersReportForm.get('startDate')?.touched">
+            La fecha de inicio es requerida.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="endDate">Fecha de final *</label>
+        <input id="endDate" type="date" formControlName="endDate" />
+        <div class="error-message"
+            *ngIf="transfersReportForm.get('endDate')?.invalid && transfersReportForm.get('endDate')?.touched">
+            La fecha final es requerida.
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="loading || transfersReportForm.invalid">Exportar a PDF</button>
+    </div>
+</form>

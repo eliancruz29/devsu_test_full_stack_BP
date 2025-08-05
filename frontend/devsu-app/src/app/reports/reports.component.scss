@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    flex-flow: column;
+    row-gap: 1rem;
+
+    .report-links-container {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            padding: 8px 16px;
+            background-color: #ffe20a;
+            color: black;
+            border: solid 1px #ffe20a;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #ccb506;
+            }
+        }
+    }
+}

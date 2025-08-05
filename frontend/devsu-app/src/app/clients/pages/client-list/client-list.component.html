@@ -27,7 +27,7 @@
       <tr *ngFor="let client of clients">
         <td>{{ client.name }}</td>
         <td>{{ client.genderName }}</td>
-        <td>{{ client.dateOfBirth | date }}</td>
+        <td>{{ client.dateOfBirth | date: constants.DATE_FORMAT }}</td>
         <td>{{ client.identification }}</td>
         <td>{{ client.address }}</td>
         <td>{{ client.phoneNumber }}</td>

@@ -28,10 +28,10 @@
         <tbody>
             <tr *ngFor="let transfer of transfers">
                 <td>{{ transfer.accountNumber }}</td>
-                <td>{{ transfer.date | date: 'MMM dd, yyyy HH:mm:ss a' }}</td>
+                <td>{{ transfer.date | date: constants.DATE_FORMAT }}</td>
                 <td>{{ transfer.typeName }}</td>
-                <td>{{ transfer.amount | currency }}</td>
-                <td>{{ transfer.balance | currency }}</td>
+                <td>{{ transfer.amount | currency: constants.DEFAULT_CURRENCY : 'symbol' : constants.CURRENCY_DECIMALS }}</td>
+                <td>{{ transfer.balance | currency: constants.DEFAULT_CURRENCY : 'symbol' : constants.CURRENCY_DECIMALS }}</td>
                 <td>{{ transfer.statusName }}</td>
                 <td>
                     <button (click)="editTransfer(transfer.id)">Editar</button>
