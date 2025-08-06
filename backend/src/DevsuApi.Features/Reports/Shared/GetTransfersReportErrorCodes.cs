@@ -1,4 +1,4 @@
-namespace DevsuApi.Features.Reports.GetTransfersReport;
+namespace DevsuApi.Features.Reports.Shared;
 
 public static class GetTransfersReportErrorCodes
 {

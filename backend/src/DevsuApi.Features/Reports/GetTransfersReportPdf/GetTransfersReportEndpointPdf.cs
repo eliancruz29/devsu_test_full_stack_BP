@@ -1,4 +1,5 @@
 using Carter;
+using DevsuApi.Features.Reports.GetTransfersReport;
 using DevsuApi.Features.Reports.Shared;
 using Mapster;
 using MediatR;
@@ -6,15 +7,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace DevsuApi.Features.Reports.GetTransfersReport;
+namespace DevsuApi.Features.Reports.GetTransfersReportPdf;
 
-public class GetTransfersReportEndpoint : ICarterModule
+public class GetTransfersReportEndpointPdf : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/reports/transfers", async ([AsParameters] GetTransfersReportRequest request, ISender sender) =>
+        app.MapGet("api/reports/transfers/pdf", async ([AsParameters] GetTransfersReportRequest request, ISender sender) =>
         {
-            var query = request.Adapt<GetTransfersReportQuery>();
+            var query = request.Adapt<GetTransfersReportQueryPdf>();
 
             var result = await sender.Send(query);
 
@@ -32,7 +33,7 @@ public class GetTransfersReportEndpoint : ICarterModule
 
             return Results.Ok(result.Value);
         })
-        .WithName("GetTransfersReport")
+        .WithName("GetTransfersReportPdf")
         .WithTags("Reports")
         .Produces<IEnumerable<TransfersReportResponse>>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status204NoContent)

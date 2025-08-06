@@ -1,5 +1,6 @@
 using DevsuApi.Domain.Repositories;
 using DevsuApi.Domain.Shared;
+using DevsuApi.Features.Reports.Shared;
 using FluentValidation;
 using MediatR;
 

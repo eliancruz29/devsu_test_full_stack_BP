@@ -90,8 +90,8 @@ export class TransfersReportComponent {
   exportPDF(): void {
     const doc = new jsPDF();
     const rows = this.transfersReportData.map(r => [
-      this.datePipe.transform(r.date, this.constants.DATE_FORMAT),
       r.clientName,
+      this.datePipe.transform(r.date, this.constants.DATE_FORMAT),
       r.accountNumber,
       r.typeName,
       this.currencyPipe.transform(r.openingBalance, this.constants.DEFAULT_CURRENCY, 'symbol', this.constants.CURRENCY_DECIMALS),
@@ -101,7 +101,7 @@ export class TransfersReportComponent {
     ]);
 
     autoTable(doc, {
-      head: [['Fecha', 'Cliente', 'Numero Cuenta', 'Tipo', 'Saldo Inicial', 'Movimiento', 'Saldo Disponible', 'Estado']],
+      head: [['Cliente', 'Fecha', 'Numero Cuenta', 'Tipo', 'Saldo Inicial', 'Movimiento', 'Saldo Disponible', 'Estado']],
       body: rows
     });
 

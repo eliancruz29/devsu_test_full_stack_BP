@@ -4,33 +4,43 @@ using DevsuApi.Infrastructure.Extensions;
 
 namespace DevsuApi.Features.Reports.GetTransfersReport;
 
-public class TransfersReportResponse
+public class TransfersReportResponse : TransfersReport
 {
-    public DateTime Date { get; private set; }
-    public string ClientName { get; private set; } = string.Empty;
-    public string AccountNumber { get; private set; } = string.Empty;
-    public AccountTypes Type { get; private set; }
+    private TransfersReportResponse(
+        DateTime date,
+        string clientName,
+        string accountNumber,
+        AccountTypes type,
+        int openingBalance,
+        int amount,
+        int balance,
+        Status status
+    ) : base(
+        date,
+        clientName,
+        accountNumber,
+        type,
+        openingBalance,
+        amount,
+        balance,
+        status)
+    { }
+
     public string TypeName => Type.GetDatabaseName();
-    public int OpeningBalance { get; private set; }
-    public int Amount { get; private set; }
-    public int Balance { get; private set; }
-    public Status Status { get; private set; }
     public string StatusName => Status.GetDatabaseName();
 
     public static TransfersReportResponse Create(Client c, Account a, Transfer t)
     {
         bool isDebit = TransferTypes.Debit == t.Type;
 
-        return new()
-        {
-            Date = t.Date,
-            ClientName = c.Name,
-            AccountNumber = a.AccountNumber,
-            Type = a.Type,
-            OpeningBalance = a.OpeningBalance,
-            Amount = t.Amount * (isDebit ? -1 : 1),
-            Balance = t.Balance,
-            Status = t.Status
-        };
+        return new(
+            t.Date,
+            c.Name,
+            a.AccountNumber,
+            a.Type,
+            a.OpeningBalance,
+            t.Amount * (isDebit ? -1 : 1),
+            t.Balance,
+            t.Status);
     }
 }

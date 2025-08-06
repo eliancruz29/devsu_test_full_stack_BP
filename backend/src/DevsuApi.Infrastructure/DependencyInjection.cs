@@ -1,7 +1,9 @@
 using DevsuApi.Domain.Interfaces;
 using DevsuApi.Domain.Repositories;
+using DevsuApi.Domain.Services;
 using DevsuApi.Infrastructure.Persistence;
 using DevsuApi.Infrastructure.Repositories;
+using DevsuApi.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,8 @@ public static class DependencyInjection
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<ITransferRepository, TransferRepository>();
+
+        services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 
         return services;
     }

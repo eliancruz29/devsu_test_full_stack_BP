@@ -1,10 +1,12 @@
+using DevsuApi.Features.Reports.GetTransfersReport;
+using DevsuApi.Features.Reports.GetTransfersReportPdf;
 using FluentValidation;
 
-namespace DevsuApi.Features.Reports.GetTransfersReport;
+namespace DevsuApi.Features.Reports.Shared;
 
 public static class GetTransfersReportValidators
 {
-    public sealed class BaseAllPropertiesValidator : AbstractValidator<GetTransfersReportQuery>
+    public sealed class BaseAllPropertiesValidator : AbstractValidator<GetTransfersReportQueryBase>
     {
         public BaseAllPropertiesValidator()
         {
@@ -26,6 +28,24 @@ public static class GetTransfersReportValidators
                 .WithMessage("La fecha final debe de ser una fecha valida.")
                 .GreaterThanOrEqualTo(tr => tr.StartDate)
                 .WithMessage("La fecha final debe de ser mayor o igual a la fecha de inicio.");
+        }
+    }
+
+    public sealed class GetTransfersReportQueryValidator : AbstractValidator<GetTransfersReportQuery>
+    {
+        public GetTransfersReportQueryValidator()
+        {
+            // Include shared rules from base class
+            Include(new BaseAllPropertiesValidator());
+        }
+    }
+
+    public sealed class GetTransfersReportQueryPdfValidator : AbstractValidator<GetTransfersReportQueryPdf>
+    {
+        public GetTransfersReportQueryPdfValidator()
+        {
+            // Include shared rules from base class
+            Include(new BaseAllPropertiesValidator());
         }
     }
 }
