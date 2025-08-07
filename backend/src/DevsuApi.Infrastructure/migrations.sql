@@ -90,6 +90,11 @@ ALTER TABLE [Clients] ALTER COLUMN [Gender] nvarchar(max) NOT NULL;
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20250728230956_AddingMissingEnumTranslation', N'9.0.7');
 
+ALTER TABLE [Transfers] ADD [Status] nvarchar(max) NOT NULL DEFAULT N'';
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250804045131_AddingMissingStatusProperty', N'9.0.7');
+
 COMMIT;
 GO
 

@@ -35,6 +35,8 @@ A Minimal API built with .NET 9, ready to run, test, and deploy with Docker.
 
    dotnet ef migrations remove --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --verbose
 
+   dotnet ef migrations script --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --output ./../DevsuApi.Infrastructure/migrations.sql
+
    dotnet ef database update --project ./../DevsuApi.Infrastructure/DevsuApi.Infrastructure.csproj --verbose
    ```
 

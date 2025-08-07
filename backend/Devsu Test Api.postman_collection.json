@@ -65,7 +65,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5002/api/clients/147c3fe8-8628-457a-1ee4-08ddce2c15bb",
+							"raw": "http://localhost:5002/api/clients/975e4807-265c-49b4-b8c6-545e286319ec",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -74,7 +74,7 @@
 							"path": [
 								"api",
 								"clients",
-								"147c3fe8-8628-457a-1ee4-08ddce2c15bb"
+								"975e4807-265c-49b4-b8c6-545e286319ec"
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -103,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"User to Delete\",\n  \"gender\": 2,\n  \"dateOfBirth\": \"1983-07-29T12:57:09.747Z\",\n  \"identification\": \"012-3265478-5\",\n  \"address\": \"por ahi\",\n  \"phoneNumber\": \"1988745874\",\n  \"password\": \"string1245\"\n}",
+							"raw": "{\n  \"name\": \"User to Delete\",\n  \"gender\": 1,\n  \"dateOfBirth\": \"1983-07-29T12:57:09.747Z\",\n  \"identification\": \"012-3265478-5\",\n  \"address\": \"por ahi\",\n  \"phoneNumber\": \"1988745874\",\n  \"password\": \"string1245\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,7 +148,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"name\": \"string\",\n  \"gender\": 1,\n  \"dateOfBirth\": \"2025-07-29T12:57:27.694Z\",\n  \"identification\": \"string\",\n  \"address\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"password\": \"string\",\n  \"status\": 1\n}",
+							"raw": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"name\": \"string\",\n  \"gender\": 0,\n  \"dateOfBirth\": \"2025-07-29T12:57:27.694Z\",\n  \"identification\": \"string\",\n  \"address\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"password\": \"string\",\n  \"status\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,7 +194,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"name\": \"string\",\n  \"gender\": 1,\n  \"dateOfBirth\": \"2025-07-29T12:57:50.251Z\",\n  \"identification\": \"string\",\n  \"address\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"password\": \"string\",\n  \"status\": 1\n}",
+							"raw": "{\n  \"id\": \"975e4807-265c-49b4-b8c6-545e286319ec\",\n  \"identification\": \"\",\n  \"address\": \"test address 8\",\n  \"phoneNumber\": \"\",\n  \"password\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,7 +202,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5002/api/clients/147c3fe8-8628-457a-1ee4-08ddce2c15bb",
+							"raw": "http://localhost:5002/api/clients/975e4807-265c-49b4-b8c6-545e286319ec",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -211,7 +211,7 @@
 							"path": [
 								"api",
 								"clients",
-								"147c3fe8-8628-457a-1ee4-08ddce2c15bb"
+								"975e4807-265c-49b4-b8c6-545e286319ec"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
@@ -302,7 +302,7 @@
 							"query": [
 								{
 									"key": "clientId",
-									"value": "fac7d8b3-ef0c-4c74-90f1-7752dca9209d",
+									"value": "6714ee3c-bc68-4eba-594e-08ddce310c28",
 									"disabled": true
 								}
 							]
@@ -369,7 +369,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"clientId\": \"fac7d8b3-ef0c-4c74-90f1-7752dca9209d\",\n  \"accountNumber\": \"585544\",\n  \"type\": 1,\n  \"openingBalance\": 25\n}",
+							"raw": "{\n  \"clientId\": \"fac7d8b3-ef0c-4c74-90f1-7752dca9209d\",\n  \"accountNumber\": \"585544\",\n  \"type\": 0,\n  \"openingBalance\": 25\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -414,7 +414,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"46d933df-938f-4cb6-a016-38a9b8490daf\",\n  \"accountNumber\": \"495878\",\n  \"type\": 1,\n  \"openingBalance\": 2500,\n  \"status\": 2\n}",
+							"raw": "{\n  \"id\": \"46d933df-938f-4cb6-a016-38a9b8490daf\",\n  \"accountNumber\": \"495878\",\n  \"type\": 0,\n  \"openingBalance\": 2500,\n  \"status\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -557,7 +557,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accountId\": \"3209fdca-43b9-4373-b61b-27028ea6808f\",\n  \"type\": 2,\n  \"amount\": 540\n}",
+							"raw": "{\n  \"accountId\": \"3209fdca-43b9-4373-b61b-27028ea6808f\",\n  \"type\": 1,\n  \"amount\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -600,7 +600,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5002/api/transfers?AccounId=59bb56c7-972b-4a40-aa51-43349621df6b",
+							"raw": "http://localhost:5002/api/transfers",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -612,8 +612,289 @@
 							],
 							"query": [
 								{
-									"key": "AccounId",
-									"value": "59bb56c7-972b-4a40-aa51-43349621df6b"
+									"key": "AccountId",
+									"value": "59bb56c7-972b-4a40-aa51-43349621df6b",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transfer By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5002/api/transfers/58ff2bbb-6b1a-471f-b64b-9caaa1ad9bdd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"transfers",
+								"58ff2bbb-6b1a-471f-b64b-9caaa1ad9bdd"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"58ff2bbb-6b1a-471f-b64b-9caaa1ad9bdd\",\n  \"amount\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5002/api/transfers/58ff2bbb-6b1a-471f-b64b-9caaa1ad9bdd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"transfers",
+								"58ff2bbb-6b1a-471f-b64b-9caaa1ad9bdd"
+							]
+						},
+						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"c3fcfec2-b823-4ba6-96f2-9779f07c3d1e\",\n  \"type\": 1,\n  \"amount\": 575\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5002/api/transfers/c3fcfec2-b823-4ba6-96f2-9779f07c3d1e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"transfers",
+								"c3fcfec2-b823-4ba6-96f2-9779f07c3d1e"
+							]
+						},
+						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5002/api/transfers/bc148627-0539-4c37-ba66-352b13a9ea2c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"transfers",
+								"bc148627-0539-4c37-ba66-352b13a9ea2c"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Get Transfers Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5002/api/reports/transfers?ClientId=975e4807-265c-49b4-b8c6-545e286319ec&StartDate=2025-07-29&EndDate=2025-08-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"reports",
+								"transfers"
+							],
+							"query": [
+								{
+									"key": "ClientId",
+									"value": "975e4807-265c-49b4-b8c6-545e286319ec"
+								},
+								{
+									"key": "StartDate",
+									"value": "2025-07-29"
+								},
+								{
+									"key": "EndDate",
+									"value": "2025-08-05"
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transfers Report Pdf",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5002/api/reports/transfers/pdf?ClientId=975e4807-265c-49b4-b8c6-545e286319ec&StartDate=2025-07-29&EndDate=2025-08-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"reports",
+								"transfers",
+								"pdf"
+							],
+							"query": [
+								{
+									"key": "ClientId",
+									"value": "975e4807-265c-49b4-b8c6-545e286319ec"
+								},
+								{
+									"key": "StartDate",
+									"value": "2025-07-29"
+								},
+								{
+									"key": "EndDate",
+									"value": "2025-08-05"
 								}
 							]
 						},
