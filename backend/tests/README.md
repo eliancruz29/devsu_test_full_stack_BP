@@ -14,4 +14,4 @@ A Minimal API Test built with .NET 9, ready to run, test, and deploy with Docker
 2. Navigate to the project directory:  
    `cd devsu_test_full_stack_BP/backend/tests/DevsuApi.UnitTests`
 3. Restore dependencies:  
-   `dotnet test --no-build --logger:"console;verbosity=detailed"`
+   `dotnet test --logger:"console;verbosity=detailed"`
